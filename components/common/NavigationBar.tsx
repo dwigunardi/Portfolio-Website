@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/resizable-navbar";
 import { useMotionValueEvent, useScroll } from "motion/react";
 import { useRef, useState } from "react";
+import { useLenis } from "lenis/react";
 
 export function NavigationBar() {
     const navItems = [
@@ -37,23 +38,39 @@ export function NavigationBar() {
         offset: ["start start", "end start"],
     });
 
-    useMotionValueEvent(scrollY, "change", (latest) => {
+    const lenis = useLenis();
+
+    useMotionValueEvent(scrollY, "change", (current) => {
         const heroHeight = typeof window !== "undefined" ? window.innerHeight : 800;
-        console.log(heroHeight)
-        if (latest > heroHeight + 10) {
+        const previous = scrollY.getPrevious() ?? 0
+        if (current > heroHeight + 10 && current > previous) {
             setIsVisible(true);
         } else {
             setIsVisible(false);
         }
     });
 
+    const handleItemClick = (e: React.MouseEvent<HTMLAnchorElement>, item: { name: string; link: string }) => {
+        if (item.link.startsWith("#")) {
+            e.preventDefault(); // Mencegah browser melompat seketika (mencegah konflik)
+
+            if (item.link === "#home") {
+                lenis?.scrollTo(0); // Scroll mulus ke paling atas
+            } else {
+                lenis?.scrollTo(item.link); // Lenis bisa langsung membaca ID seperti "#pricing"
+            }
+        } else {
+            window.location.href = item.link;
+        }
+    };
+
     return (
-        <div ref={ref} className={`relative z-10 w-full ${isVisible ? "visible" : "invisible"}`}>
+        <div ref={ref} className={`relative z-50 w-full ${isVisible ? "visible" : "invisible"}`}>
             <Navbar>
                 {/* Desktop Navigation */}
                 <NavBody>
                     <NavbarLogo />
-                    <NavItems items={navItems} />
+                    <NavItems items={navItems} onItemClick={handleItemClick} />
                 </NavBody>
 
                 {/* Mobile Navigation */}

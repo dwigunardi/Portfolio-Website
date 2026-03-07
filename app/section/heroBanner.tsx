@@ -14,6 +14,33 @@ export default function HeroBanner() {
                 <div className="grid grid-cols-12">
                     {/* <SplashCursor /> */}
                     <div className="col-span-6">
+                        <div className="relative">
+                            <div className="absolute top-40 -right-40 w-full h-full z-50">
+                                <AnimatedContent
+                                    distance={100}
+                                    direction="vertical"
+                                    reverse={false}
+                                    duration={0.8}
+                                    ease="power3.out"
+                                    initialOpacity={0}
+                                    animateOpacity
+                                    scale={1}
+                                    threshold={0.1}
+                                    delay={0}
+                                >
+                                    <CircularText
+                                        text="FRONT*END*DEVELOPER*"
+                                        onHover="speedUp"
+                                        spinDuration={20}
+                                        className="custom-class cursor-default!"
+                                    />
+
+                                </AnimatedContent>
+                            </div>
+                        </div>
+                        <Lanyard position={[0, 0, 12]} gravity={[0, -40, 0]} />
+                    </div>
+                    <div className="col-span-6">
                         <div className="flex flex-col gap-4 items-start justify-center h-full">
                             <AnimatedContent
                                 distance={100}
@@ -81,8 +108,8 @@ export default function HeroBanner() {
                                 />
                                 <div className="flex items-start gap-4 mt-4">
                                     <GradientText
-                                        colors={["#C6F10E", "#38b6ff", "#B19EEF"]}
-                                        animationSpeed={2}
+                                        colors={["#38b6ff", "#B19EEF"]}
+                                        animationSpeed={6}
                                         showBorder
                                         yoyo
                                         className="px-6 py-4 rounded-md text-sm font-medium"
@@ -92,33 +119,6 @@ export default function HeroBanner() {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="col-span-6">
-                        <div className="relative">
-                            <div className="absolute top-40 -right-40 w-full h-full z-50">
-                                <AnimatedContent
-                                    distance={100}
-                                    direction="vertical"
-                                    reverse={false}
-                                    duration={0.8}
-                                    ease="power3.out"
-                                    initialOpacity={0}
-                                    animateOpacity
-                                    scale={1}
-                                    threshold={0.1}
-                                    delay={0}
-                                >
-                                    <CircularText
-                                        text="FRONT*END*DEVELOPER*"
-                                        onHover="speedUp"
-                                        spinDuration={20}
-                                        className="custom-class cursor-default!"
-                                    />
-
-                                </AnimatedContent>
-                            </div>
-                        </div>
-                        <Lanyard position={[0, 0, 12]} gravity={[0, -40, 0]} />
                     </div>
                 </div>
             </div>

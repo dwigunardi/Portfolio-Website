@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import "./globals.css";
+import SmoothScrollProvider from "@/components/provider/SmoothScrollProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,9 +23,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <TooltipProvider>
-          {children}
-        </TooltipProvider>
+        <SmoothScrollProvider>
+          <TooltipProvider>
+            {children}
+          </TooltipProvider>
+        </SmoothScrollProvider>
       </body>
     </html>
   );

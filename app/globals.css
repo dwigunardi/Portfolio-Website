@@ -9,7 +9,7 @@
   --color-yellow-primary: #C6F10E;
   --color-blue-primary: #38b6ff;
   --color-red-primary: #FF0000;
-  --color-green-primary: #00FF00;
+  --color-green-primary: "#C6F10E";
 }
 
 @theme inline {
@@ -144,5 +144,6 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-poppins), sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    scroll-behavior: smooth;
   }
 }

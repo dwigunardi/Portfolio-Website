@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import HeroBanner from "./section/heroBanner";
 import Squares from "@/components/Squares";
 import { NavigationBar } from "@/components/common/NavigationBar";
+import FloatingLines from "@/components/FloatingLines";
+import { TimelineDemo } from "@/components/common/TimeLineList";
 
 export const metadata: Metadata = {
   title: "Home - Dwi Gunardi M Portfolio",
@@ -11,14 +13,18 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="min-h-screen overflow-x-hidden bg-black">
+    <div className="min-h-screen overflow-x-hidden bg-neutral-950" id="home">
       <div className="absolute top-0 left-0 w-full h-full z-0">
-        <Squares
-          speed={0.5}
-          squareSize={40}
-          direction='diagonal' // up, down, left, right, diagonal
-          borderColor='#0a2230'
-          hoverFillColor='#38b6ff'
+        <FloatingLines
+          enabledWaves={["top", "middle", "bottom"]}
+          // Array - specify line count per wave; Number - same count for all waves
+          lineCount={5}
+          // Array - specify line distance per wave; Number - same distance for all waves
+          lineDistance={5}
+          bendRadius={5}
+          bendStrength={-0.5}
+          interactive={true}
+          parallax={true}
         />
       </div>
       <HeroBanner />
@@ -27,10 +33,14 @@ export default function Home() {
         velocity={100}
         className="font-bold text-center text-white text-5xl"
       />
-      <div className="w-full h-full relative z-10">
+      {/* <div className="w-full h-full relative z-10">
+      </div> */}
+      <div className="container mx-auto relative z-10">
         <NavigationBar />
+        <div className="flex flex-col items-center justify-center gap-20 mt-10">
+          <TimelineDemo />
+        </div>
       </div>
-      <div className="h-screen"></div>
     </div>
   );
 }

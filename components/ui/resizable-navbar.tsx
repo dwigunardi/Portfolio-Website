@@ -28,7 +28,7 @@ interface NavItemsProps {
     link: string;
   }[];
   className?: string;
-  onItemClick?: () => void;
+  onItemClick?: (e: React.MouseEvent<HTMLAnchorElement>, item: { name: string; link: string }) => void;
 }
 
 interface MobileNavProps {
@@ -55,7 +55,8 @@ export const Navbar = ({ children, className }: NavbarProps) => {
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const heroHeight = typeof window !== "undefined" ? window.innerHeight : 800;
-    if (latest > heroHeight + 50) {
+    const previous = scrollY.getPrevious() ?? 0
+    if (latest > heroHeight + 50 && latest > previous) {
       setVisible(true);
     } else {
       setVisible(false);
@@ -83,12 +84,12 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
   return (
     <motion.div
       animate={{
-        backdropFilter: visible ? "blur(16px)" : "blur(0px)",
+        backdropFilter: visible ? "blur(10px)" : "blur(0px)",
         boxShadow: visible
           ? "0 4px 30px rgba(0, 0, 0, 0.1)"
           : "none",
         width: visible ? "50%" : "100%",
-        y: visible ? 20 : 0,
+        y: visible ? 20 : -20,
       }}
       transition={{
         type: "spring",
@@ -123,7 +124,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
       {items.map((item, idx) => (
         <a
           onMouseEnter={() => setHovered(idx)}
-          onClick={onItemClick}
+          onClick={(e) => onItemClick && onItemClick(e, item)}
           className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300"
           key={`link-${idx}`}
           href={item.link}
@@ -153,7 +154,6 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
         width: visible ? "90%" : "100%",
         paddingRight: visible ? "12px" : "0px",
         paddingLeft: visible ? "12px" : "0px",
-        borderRadius: visible ? "4px" : "opx",
         y: visible ? 20 : 0,
       }}
       transition={{
