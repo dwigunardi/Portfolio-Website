@@ -1,10 +1,12 @@
 import ScrollVelocity from "@/components/ScrollVelocity";
 import type { Metadata } from "next";
-import HeroBanner from "./section/heroBanner";
+import HeroBanner from "../components/section/heroBanner";
 import Squares from "@/components/Squares";
 import { NavigationBar } from "@/components/common/NavigationBar";
 import FloatingLines from "@/components/FloatingLines";
-import { TimelineDemo } from "@/components/common/TimeLineList";
+import { WorkTimeLine } from "@/components/section/WorkTimeLine";
+import AboutMe from "@/components/section/AboutMe";
+import Expertise from "@/components/section/Expertise";
 
 export const metadata: Metadata = {
   title: "Home - Dwi Gunardi M Portfolio",
@@ -37,8 +39,10 @@ export default function Home() {
       </div> */}
       <div className="container mx-auto relative z-10">
         <NavigationBar />
-        <div className="flex flex-col items-center justify-center gap-20 mt-10">
-          <TimelineDemo />
+        <div className="flex flex-col items-center justify-center gap-20 mt-32">
+          <AboutMe />
+          <WorkTimeLine />
+          <Expertise />
         </div>
       </div>
     </div>

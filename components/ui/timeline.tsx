@@ -15,17 +15,35 @@ interface TimelineEntry {
   content: React.ReactNode;
 }
 
-export const Timeline = ({ data, title, subtitle }: { data: TimelineEntry[]; title: string | React.ReactNode; subtitle: string | React.ReactNode }) => {
+export const Timeline = ({
+  data,
+  title,
+  subtitle,
+}: {
+  data: TimelineEntry[];
+  title: string | React.ReactNode;
+  subtitle: string | React.ReactNode;
+}) => {
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
 
   useEffect(() => {
-    if (ref.current) {
-      const rect = ref.current.getBoundingClientRect();
-      setHeight(rect.height);
-    }
-  }, [ref]);
+    if (!ref.current) return;
+
+    // Gunakan ResizeObserver untuk memantau perubahan tinggi secara real-time
+    const resizeObserver = new ResizeObserver(() => {
+      if (ref.current) {
+        const rect = ref.current.getBoundingClientRect();
+        setHeight(rect.height);
+      }
+    });
+
+    // Mulai observasi pada elemen timeline
+    resizeObserver.observe(ref.current);
+
+    return () => resizeObserver.disconnect();
+  }, [])
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -46,7 +64,7 @@ export const Timeline = ({ data, title, subtitle }: { data: TimelineEntry[]; tit
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <div className="flex flex-col items-start justify-start gap-10 text-start">
+          <div className="flex flex-col items-start justify-start gap-5 text-start">
             {typeof title === "string" ? (
               <h2 className="text-lg md:text-4xl mb-4 text-white max-w-4xl">
                 {title}
@@ -79,62 +97,61 @@ export const Timeline = ({ data, title, subtitle }: { data: TimelineEntry[]; tit
       </div>
 
       <div ref={ref} className="relative max-w-7xl mx-auto pb-20">
-        {data.map((item, index) => (
-          <AnimatedContent
-            distance={100}
-            direction="horizontal"
-            reverse={false}
-            duration={0.8}
-            ease="power3.out"
-            initialOpacity={0}
-            animateOpacity
-            scale={1}
-            threshold={0.1}
-            delay={0}
-            key={index}
-          >
-            <div
-              className="flex justify-start pt-10 gap-10"
-            >
-              <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
-                <div className="h-10 absolute top-1.5 left-3 md:left-3 w-10 rounded-full bg-white dark:bg-black flex items-center justify-center">
-                  <div className="h-4 w-4 rounded-full bg-neutral-200 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 p-2" />
-                </div>
-                <div className="flex flex-col items-end justify-end gap-4 self-start max-w-xs lg:max-w-sm md:w-full">
-                  <h3 className="hidden md:block text-xl md:pl-20 md:text-4xl font-bold text-blue-primary dark:text-blue-primary">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm md:text-base text-neutral-500 dark:text-neutral-500 max-w-2/3 text-right">
-                    {item.description}
-                  </p>
-                  <p className="text-sm md:text-base text-neutral-500 dark:text-neutral-500">
-                    {item.date}
-                  </p>
-                </div>
-              </div>
-              <div className="relative pl-20 pr-4 md:pl-4 w-full">
-                <h3 className="md:hidden block text-2xl mb-4 text-left font-bold text-neutral-500 dark:text-neutral-500">
-                  {item.title}
-                </h3>
-                {item.content}{" "}
-              </div>
-            </div>
-          </AnimatedContent>
-        ))}
         <div
           style={{
             height: height + "px",
           }}
-          className="absolute md:left-8 left-8 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-neutral-200 dark:via-neutral-700 to-transparent to-[99%]  [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] "
+          className="absolute md:left-8 left-8 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-neutral-200 dark:via-neutral-700 to-transparent to-[99%]  [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] z-0"
         >
           <motion.div
             style={{
               height: heightTransform,
               opacity: opacityTransform,
             }}
-            className="absolute inset-x-0 top-0 z-0  w-[2px] bg-gradient-to-t from-purple-500 via-blue-500 to-transparent from-[0%] via-[10%] rounded-full"
+            className="absolute inset-x-0 top-0 z-0 w-[2px] bg-gradient-to-t from-purple-500 via-blue-500 to-transparent from-[0%] via-[10%] rounded-full"
           />
         </div>
+        {data.map((item, index) => (
+          <div key={index} className="relative z-10">
+            <AnimatedContent
+              distance={100}
+              direction="horizontal"
+              reverse={false}
+              duration={0.8}
+              ease="power3.out"
+              initialOpacity={0}
+              animateOpacity
+              scale={1}
+              threshold={0.1}
+              delay={0.8}
+            >
+              <div className="flex justify-start pt-10 gap-10">
+                <div className="sticky flex flex-col md:flex-row items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
+                  <div className="h-10 absolute top-1.5 left-3 md:left-3 w-10 rounded-full bg-white dark:bg-black flex items-center justify-center z-40">
+                    <div className="h-4 w-4 rounded-full bg-neutral-200 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 p-2" />
+                  </div>
+                  <div className="flex flex-col items-end justify-end gap-4 self-start max-w-xs lg:max-w-sm md:w-full">
+                    <h3 className="hidden md:block text-xl md:pl-20 md:text-4xl font-bold text-blue-primary dark:text-blue-primary">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm md:text-base text-neutral-500 dark:text-neutral-500 max-w-2/3 text-right">
+                      {item.description}
+                    </p>
+                    <p className="text-sm md:text-base text-neutral-500 dark:text-neutral-500">
+                      {item.date}
+                    </p>
+                  </div>
+                </div>
+                <div className="relative pl-20 pr-4 md:pl-4 w-full">
+                  <h3 className="md:hidden block text-2xl mb-4 text-left font-bold text-neutral-500 dark:text-neutral-500">
+                    {item.title}
+                  </h3>
+                  {item.content}{" "}
+                </div>
+              </div>
+            </AnimatedContent>
+          </div>
+        ))}
       </div>
     </div>
   );
