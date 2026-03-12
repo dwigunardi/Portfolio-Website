@@ -16,6 +16,8 @@ declare global {
     namespace React {
         namespace JSX {
             interface IntrinsicElements extends ThreeElements {
+                meshLineGeometry: any;
+                meshLineMaterial: any;
             }
         }
     }

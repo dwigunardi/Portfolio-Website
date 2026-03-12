@@ -4,7 +4,6 @@ import CircularText from "@/components/CircularText";
 import GradientText from "@/components/GradientText";
 import Lanyard from "@/components/lanyard";
 import RotatingText from "@/components/RotatingText";
-import SplashCursor from "@/components/SplashCursor";
 import SplitText from "@/components/SplitText";
 
 export default function HeroBanner() {
@@ -12,7 +11,6 @@ export default function HeroBanner() {
         <section className="w-full h-screen">
             <div className="container mx-auto h-screen relative">
                 <div className="grid grid-cols-12">
-                    {/* <SplashCursor /> */}
                     <div className="col-span-6">
                         <div className="relative">
                             <div className="absolute top-40 -right-40 w-full h-full z-50">
@@ -55,7 +53,7 @@ export default function HeroBanner() {
                                 delay={0}
                             >
                                 <div className="flex items-center gap-2">
-                                    <h1 className="text-2xl font-bold text-white">I'm Ready to Code</h1>
+                                    <h1 className="text-2xl font-bold text-white">I`m Ready to Code</h1>
                                     <RotatingText
                                         texts={['Web Development', 'Web Design', 'Web Developer', 'Vibe Coder!']}
                                         mainClassName="px-2 sm:px-2 md:px-3 bg-blue-primary text-black overflow-hidden py-1 justify-center rounded-lg text-2xl font-bold inline-flex transition-all"
