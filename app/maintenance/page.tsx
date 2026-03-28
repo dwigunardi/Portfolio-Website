@@ -10,17 +10,13 @@ export default function MaintenancePage() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute top-1/4 right-1/4 w-[300px] h-[300px] bg-purple-600/20 rounded-full blur-[100px] pointer-events-none" />
 
-            {/* Main Container */}
             <div className="relative z-10 container mx-auto px-4 flex flex-col items-center text-center">
-
-                {/* Animated Icons */}
                 <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: "spring", stiffness: 200, damping: 20 }}
                     className="relative flex items-center justify-center mb-8"
                 >
-                    {/* Gear berputar perlahan */}
                     <motion.div
                         animate={{ rotate: 360 }}
                         transition={{ repeat: Infinity, duration: 12, ease: "linear" }}
@@ -28,13 +24,9 @@ export default function MaintenancePage() {
                     >
                         <Settings size={120} strokeWidth={1} />
                     </motion.div>
-
-                    {/* Ikon Wrench di tengah */}
                     <div className="relative z-10 bg-gradient-to-br from-blue-500 to-purple-600 p-4 rounded-2xl shadow-lg shadow-blue-500/20">
                         <Wrench size={40} className="text-white" />
                     </div>
-
-                    {/* Sparkles melayang kecil */}
                     <motion.div
                         animate={{ y: [-5, 5, -5], opacity: [0.5, 1, 0.5] }}
                         transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
@@ -43,8 +35,6 @@ export default function MaintenancePage() {
                         <Sparkles size={24} />
                     </motion.div>
                 </motion.div>
-
-                {/* Text Content dengan Staggered Animation */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -67,14 +57,11 @@ export default function MaintenancePage() {
                             under maintenance
                         </span>
                     </h1>
-
                     <p className="text-lg md:text-xl text-neutral-400 mb-10 leading-relaxed">
                         I'm currently upgrading the portfolio to bring you a better experience.
                         Everything will be back online shortly. Thank you for your patience!
                     </p>
                 </motion.div>
-
-                {/* Animated Progress/Loading Line */}
                 <motion.div
                     initial={{ opacity: 0, scaleX: 0 }}
                     animate={{ opacity: 1, scaleX: 1 }}
@@ -88,7 +75,6 @@ export default function MaintenancePage() {
                         className="w-1/2 h-full bg-gradient-to-r from-transparent via-blue-500 to-transparent rounded-full"
                     />
                 </motion.div>
-
             </div>
         </div>
     );

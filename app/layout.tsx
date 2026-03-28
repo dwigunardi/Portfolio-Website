@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     }],
   },
   verification: {
-    google: "google-site-verification=9nXWidSl0m9DDB93k7Rm84WVGl_-TeE4RhTUpyD6Utk", // Pastikan ini kode asli dari Google Search Console nanti
+    google: "google-site-verification=7zxm8DQfpEF5GELxvJB05R337OegQeJfz7eDXkfKv44",
   },
 };
 

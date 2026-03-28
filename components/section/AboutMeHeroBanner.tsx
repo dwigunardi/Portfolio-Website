@@ -7,10 +7,10 @@ import { motion } from "framer-motion";
 import Lanyard from "@/components/lanyard";
 import RotatingText from "@/components/RotatingText";
 import SplitText from "@/components/SplitText";
-import { SlideInButton } from "../common/SlideInButton";
+import { SlideInButton } from "@/components/common/SlideInButton";
 import { ArrowUpRight } from "lucide-react";
-import InfiniteCard from "../infiniteCard";
-import { techStacks } from "./Expertise";
+import InfiniteCard from "@/components/infiniteCard";
+import { techStacks } from "@/components/section/Expertise";
 
 export default function HeroBanner() {
 

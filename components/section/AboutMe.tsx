@@ -1,8 +1,8 @@
 'use client';
 
-import AnimatedContent from "../AnimatedContent";
-import ShinyText from "../ShinyText";
-import ScrollRevealText from "../ScrollRevealText";
+import AnimatedContent from "@/components/AnimatedContent";
+import ShinyText from "@/components/ShinyText";
+import ScrollRevealText from "@/components/ScrollRevealText";
 
 export default function AboutMe() {
     return (

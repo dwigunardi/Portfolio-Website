@@ -14,11 +14,9 @@ export default function InfiniteMarquee({
     className,
 }: InfiniteMarqueeProps) {
     return (
-        // Overflow-hidden wajib agar teks yang keluar layar tidak membuat horizontal scroll
         <div className={cn("relative flex w-full overflow-hidden bg-neutral-950 py-4", className)}>
             <motion.div
                 className="flex whitespace-nowrap"
-                // Bergerak dari 0 hingga -50% (karena kita menduplikasi kontennya 2 kali)
                 animate={{ x: ["0%", "-50%"] }}
                 transition={{
                     repeat: Infinity,
@@ -38,7 +36,6 @@ export default function InfiniteMarquee({
                                 <span className="text-5xl md:text-7xl font-black uppercase tracking-wider text-transparent [-webkit-text-stroke:2px_#3f3f46] hover:[-webkit-text-stroke:2px_#ffffff] transition-all duration-300 cursor-default">
                                     {word}
                                 </span>
-
                                 {/* Simbol Pemisah (bisa diganti dengan bintang, titik, dll) */}
                                 <span className="text-4xl text-neutral-700">✦</span>
                             </div>

@@ -2,7 +2,7 @@
 
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { BREAKPOINTS } from "@/const/breakpoints";
-import FloatingLines from "../FloatingLines";
+import FloatingLines from "@/components/FloatingLines";
 import { cn } from "@/lib/utils";
 
 type BackgroundSectionProps = {
@@ -26,7 +26,6 @@ export default function BackgroundSection({ enableWaves, opacity }: BackgroundSe
                         bendStrength={-0.5}
                         interactive={true}
                         parallax={true}
-                        // PERBAIKAN: Gunakan normal agar garis transparan dirender apa adanya
                         mixBlendMode="normal"
                     />
                 </div>

@@ -3,36 +3,29 @@
 import { useRef } from "react";
 import { useScroll, useTransform, motion } from "motion/react"; // Sesuaikan dengan import Anda
 import Image from "next/image";
-import AnimatedContent from "../AnimatedContent";
-import { Button } from "../ui/button";
+import AnimatedContent from "@/components/AnimatedContent";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function ZoomOutSection() {
-    // 1. Ref untuk mendeteksi kapan seksi ini masuk ke layar
     const containerRef = useRef<HTMLDivElement>(null);
 
-    // 2. Pantau pergerakan scroll pada container ini
     const { scrollYProgress } = useScroll({
         target: containerRef,
-        // Animasi dimulai saat ujung atas elemen menyentuh bawah layar ("start end")
-        // Animasi selesai saat ujung bawah elemen menyentuh atas layar ("end start")
         offset: ["start end", "end start"],
     });
-
-    // 3. RUMUS ZOOM OUT: Saat di-scroll, ubah skala gambar dari 1.3 (membesar) menjadi 1 (normal)
     const scale = useTransform(scrollYProgress, [0, 1], [1.5, 1]);
 
-    // (Opsional) RUMUS PARALLAX: Agar gambar juga sedikit bergerak ke bawah saat di-scroll
-    const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+    // RUMUS PARALLAX: Agar gambar juga sedikit bergerak ke bawah saat di-scroll
+    const parallaxEffect = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
     return (
         <section
             ref={containerRef}
-            className="relative w-full h-[90vh] min-h-[600px] overflow-hidden flex items-center justify-center mt-32"
+            className="relative w-full h-[90vh] min-h-150 overflow-hidden flex items-center justify-center mt-32"
         >
-            {/* Latar Belakang Gambar yang akan di-Zoom Out */}
             <motion.div
-                style={{ scale, y }}
+                style={{ scale, y: parallaxEffect }}
                 className="absolute inset-0 w-full h-full will-change-transform"
             >
                 <Image
@@ -42,9 +35,8 @@ export default function ZoomOutSection() {
                     className="object-cover opacity-50 dark:opacity-30"
                 />
             </motion.div>
-
-            {/* Gradient Overlay (Agar transisi dari hitamnya background sebelumnya nge-blend) */}
-            <div className="absolute inset-0 dark:bg-gradient-to-t  dark:from-neutral-950 dark:via-neutral-950/40 dark:to-neutral-950" />
+            
+            <div className="absolute inset-0 dark:bg-linear-to-t  dark:from-neutral-950 dark:via-neutral-950/40 dark:to-neutral-950" />
             <div className="relative z-10 container mx-auto px-4 flex flex-col items-center text-center gap-8">
                 <AnimatedContent
                     distance={100}

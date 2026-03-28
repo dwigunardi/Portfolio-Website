@@ -1,12 +1,12 @@
 'use client';
 
 import { IconApiApp, IconBrandCss3, IconBrandCypress, IconBrandDocker, IconBrandFigma, IconBrandFirebase, IconBrandFramerMotion, IconBrandGithub, IconBrandGitlab, IconBrandHtml5, IconBrandJavascript, IconBrandMysql, IconBrandNextjs, IconBrandNodejs, IconBrandNuxt, IconBrandReact, IconBrandTypescript, IconBrandVue, IconCode } from "@tabler/icons-react";
-import AnimatedContent from "../AnimatedContent";
-import InfiniteCard, { TechItem } from "../infiniteCard";
-import ShinyText from "../ShinyText";
-import SplitText from "../SplitText";
-import { Card, CardContent, } from "../ui/card";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import AnimatedContent from "@/components/AnimatedContent";
+import InfiniteCard, { TechItem } from "@/components/infiniteCard";
+import ShinyText from "@/components/ShinyText";
+import SplitText from "@/components/SplitText";
+import { Card, CardContent, } from "@/components/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
@@ -32,8 +32,6 @@ export const techStacks: TechItem[] = [
 ];
 
 export default function Expertise() {
-
-
     const cardItems = [
         {
             value: "development",
@@ -100,7 +98,6 @@ export default function Expertise() {
                         rootMargin="-100px"
                         textAlign="center"
                     />
-
                 </div>
                 <AnimatedContent
                     distance={50}
@@ -133,8 +130,7 @@ export default function Expertise() {
                                 </Accordion>
                             </CardContent>
                         </Card>
-
-                        <div className="relative w-full h-[300px] md:h-full min-h-[400px] rounded-xl overflow-hidden bg-neutral-900 border border-neutral-800 shadow-xl group">
+                        <div className="relative w-full h-75 md:h-full min-h-100 rounded-xl overflow-hidden bg-neutral-900 border border-neutral-800 shadow-xl group">
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={activeItem}
@@ -153,17 +149,14 @@ export default function Expertise() {
                                         sizes="(max-width: 768px) 100vw, 50vw"
                                         priority
                                     />
-
                                     {/* 1. LAYER VIGNETTE: Radial gradient gelap di pinggiran, transparan di tengah */}
-                                    {/* Pointer-events-none penting agar gradient ini tidak menutupi klik jika ada interaksi */}
                                     <div className="absolute inset-0 rounded-2xl pointer-events-none bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.8)_100%)]" />
 
                                     {/* 2. LAYER GRADIENT BAWAH (Opsional, dari kode Anda sebelumnya) */}
-                                    <div className="absolute inset-0 rounded-2xl pointer-events-none bg-gradient-to-t from-[#111116]/90 via-transparent to-transparent" />
+                                    <div className="absolute inset-0 rounded-2xl pointer-events-none bg-linear-to-t from-[#111116]/90 via-transparent to-transparent" />
 
                                     {/* 3. EFEK HOVER (Bonus): Gambar sedikit membesar saat mouse diarahkan ke area gambar */}
                                     <div className="absolute inset-0 rounded-2xl pointer-events-none ring-1 ring-inset ring-white/10 group-hover:bg-black/10 transition-colors duration-500" />
-
                                 </motion.div>
                             </AnimatePresence>
                         </div>

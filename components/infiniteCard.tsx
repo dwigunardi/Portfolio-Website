@@ -13,20 +13,19 @@ export interface TechItem {
 interface InfiniteCardProps {
     items: TechItem[];
     className?: string;
-    speed?: number; // Skala speed berubah: Gunakan angka kecil misal 1, 2, atau 3
+    speed?: number;
     direction?: "left" | "right";
 }
 
 export default function InfiniteCard({
     items,
     className,
-    speed = 1.5, // Default kecepatan standar
+    speed = 1.5,
     direction = "left",
 }: InfiniteCardProps) {
     const baseX = useMotionValue(0);
     const [isHovered, setIsHovered] = useState(false);
     
-    // useRef untuk melacak kecepatan saat ini agar transisi mulus
     const currentSpeed = useRef(speed);
 
     // Engine Animasi Kustom yang berjalan setiap frame browser (60fps/120fps)
@@ -55,7 +54,6 @@ export default function InfiniteCard({
                 "relative flex w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]",
                 className
             )}
-            // Deteksi Hover untuk mengaktifkan perlambatan
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
@@ -63,7 +61,6 @@ export default function InfiniteCard({
                 className="flex w-max min-w-full shrink-0 items-center gap-4 py-4 will-change-transform"
                 style={{ x }}
             >
-                {/* RENDER 4 KALI: Menggaransi tidak ada ruang kosong sekecil apapun layarnya */}
                 {[...items, ...items, ...items, ...items].map((item, i) => (
                     <div
                         key={`${item.id}-${i}`}

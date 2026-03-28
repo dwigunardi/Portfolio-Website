@@ -3,15 +3,15 @@
 import React from "react";
 import { Timeline } from "@/components/ui/timeline";
 import { TimelineMobile } from "@/components/ui/timeline-horizontal";
-import ShinyText from "../ShinyText";
-import AnimatedContent from "../AnimatedContent";
+import ShinyText from "@/components/ShinyText";
+import AnimatedContent from "@/components/AnimatedContent";
 import Image from "next/image";
-import ReadMore from "../common/ReadMore";
-import ShowMore from "../common/ShowMore";
+import ReadMore from "@/components/common/ReadMore";
+import ShowMore from "@/components/common/ShowMore";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { BREAKPOINTS } from "@/const/breakpoints";
-import SplitText from "../SplitText";
-import BorderGlow from "../BorderGlow";
+import SplitText from "@/components/SplitText";
+import BorderGlow from "@/components/BorderGlow";
 import { WORK_EXPERIENCE_DATA } from "@/const/WorkTimelineData";
 
 export function WorkTimeLine() {
@@ -28,13 +28,11 @@ export function WorkTimeLine() {
                     className="mb-8 text-base font-normal text-neutral-800 dark:text-neutral-200"
                     lineHeight={1.75}
                 />
-                
-                {item.projectsIntro && (
+                {item.projectsIntro ? (
                     <p className="mb-8 text-base font-normal text-neutral-800 dark:text-neutral-200">
                         {item.projectsIntro}
                     </p>
-                )}
-                
+                ) : null}
                 <ShowMore
                     maxHeight={150}
                     className="flex flex-col gap-4"
@@ -62,12 +60,11 @@ export function WorkTimeLine() {
                                         className="h-20 w-full rounded-lg object-cover md:h-44 lg:h-60"
                                     />
                                 </BorderGlow>
-                                
-                                {project.title && (
+                                {project.title ? (
                                     <p className="mb-8 text-base font-normal text-neutral-800 dark:text-neutral-200">
                                         {project.title}
                                     </p>
-                                )}
+                                ) : null}
                             </div>
                         ))}
                     </div>
@@ -131,12 +128,10 @@ export function WorkTimeLine() {
     return (
         <section className="relative w-full block text-justify mx-auto" id="timeline">
             {isDesktop ? (
-                // Desktop: Render Timeline Vertical yang lama
                 <div className="w-full relative min-h-screen">
                     <Timeline data={mappedData} title={renderTitle()} subtitle={subtitle} />
                 </div>
             ) : (
-                // Mobile: Render Timeline Horizontal Baru
                 <TimelineMobile data={mappedData} title={renderTitle()} subtitle={subtitle} />
             )}
         </section>

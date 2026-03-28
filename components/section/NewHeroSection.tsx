@@ -2,10 +2,11 @@
 
 import { Hand, ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
-import { SlideInButton } from "../common/SlideInButton"; // Sesuaikan path jika berbeda
-import BackgroundSection from "./Background"; // Sesuaikan path dengan lokasi BackgroundSection Anda
+import { SlideInButton } from "@/components/common/SlideInButton";
+import BackgroundSection from "@/components/section/Background"; // Sesuaikan path dengan lokasi BackgroundSection Anda
 import Link from "next/link";
 import { introState } from "@/lib/utils";
+import { SOCIAL_LINKS } from "@/const/routes-list";
 
 export default function NewHeroSection() {
     const baseDelay = introState.hasPlayed ? 0.2 : 1.8;
@@ -21,13 +22,9 @@ export default function NewHeroSection() {
     }
 
     return (
-        // 1. WRAPPER TERLUAR: Lebar penuh layar, mengontrol tinggi, dan menampung background
         <section className="relative w-full min-h-screen overflow-hidden dark:bg-neutral-950 flex items-center">
-            
-            {/* 2. BACKGROUND ANIMASI: Sekarang ada di dalam Hero, akan otomatis mengikuti tingginya */}
             <BackgroundSection enableWaves={['top', 'bottom']} />
-
-            {/* 3. KONTEN HERO: Dibungkus container agar tetap rapi di tengah, dan diberi z-10 agar di atas background */}
+            {/*  KONTEN HERO: Dibungkus container agar tetap rapi di tengah, dan diberi z-10 agar di atas background */}
             <div className="relative z-10 container mx-auto px-6 md:px-10 pt-40 pb-20 max-w-7xl w-full">
                 <div className="flex flex-col gap-6">
                     <motion.div
@@ -42,7 +39,6 @@ export default function NewHeroSection() {
                             Hey! It's me Dwi Gunardi M,
                         </p>
                     </motion.div>
-                    
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -52,7 +48,6 @@ export default function NewHeroSection() {
                             Coding immersive <span className="text-blue-500">web experiences</span> that look great and feel <span className="text-blue-500">even better</span>.
                         </h1>
                     </motion.div>
-                    
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -64,7 +59,6 @@ export default function NewHeroSection() {
                             I work with professionals who are passionate about building pixel-perfect, engaging, and accessible digital experiences that drive results and achieve business goals.
                         </p>
                     </motion.div>
-                    
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -72,11 +66,7 @@ export default function NewHeroSection() {
                         className="mt-12 flex flex-col justify-between gap-12 lg:gap-8 lg:flex-row lg:items-center"
                     >
                         <ul className="flex flex-wrap gap-6 md:gap-8">
-                            {[
-                                { name: "LinkedIn", url: "https://www.linkedin.com/in/dwigm" },
-                                { name: "GitHub", url: "https://github.com/" },
-                                { name: "Gmail", url: "mailto:dwigunardi98@gmail.com" },
-                            ].map((link, idx) => (
+                            {SOCIAL_LINKS.map((link, idx) => (
                                 <li key={idx}>
                                     <Link
                                         target="_blank"
@@ -90,7 +80,6 @@ export default function NewHeroSection() {
                                 </li>
                             ))}
                         </ul>
-
                         <SlideInButton
                             initialText="Know me better"
                             hoverText="Let's Go!"

@@ -22,7 +22,7 @@ export const WORK_EXPERIENCE_DATA = [
             { imageSrc: "/assets/ACSA/Login-SIPD.webp", alt: "Login SIPD", title: "SIPD (Sistem Informasi Pengelolaan Dana)" },
             { imageSrc: "/assets/ACSA/bri-workbench-cockpit.webp", alt: "BRI WorkBench Cockpit", title: "BRI WorkBench (Internal Dashboard for Sales Division Bank Rakyat Indonesia)" },
             { imageSrc: "/assets/trustlink/trustlink.png", alt: "Trustlink V2", title: "Trustlink V2 (Company Profile Website for PT. Cakrawala Data Integrasi)" },
-            { imageSrc: "/assets/ACSA/dashboard-DWH.webp", alt: "Dashboard DWH", title: "Telkom Data Warehouse (Internal Dashboard for Telkom Infra)" },
+            { imageSrc: "/assets/ACSA/Dashboard-DWH.webp", alt: "Dashboard DWH", title: "Telkom Data Warehouse (Internal Dashboard for Telkom Infra)" },
             { imageSrc: "/assets/ACSA/Beranda-peruri.webp", alt: "Beranda Peruri", title: "Peruri (Company Profile Website for Portal Nasional Peruri)" },
         ]
     },
