@@ -78,14 +78,14 @@ const Letter = ({
     return (
         <span className="relative inline-block">
             {/* 1. Lapisan Dasar (Warna "Hitam" / Gelap) */}
-            <span className="absolute text-neutral-800 dark:text-neutral-800">
+            <span className="absolute text-neutral-100 dark:text-neutral-800">
                 {children}
             </span>
 
             {/* 2. Lapisan Sorotan (Warna Putih yang perlahan muncul) */}
             <motion.span
                 style={{ opacity }}
-                className="relative z-10 text-white dark:text-white"
+                className="relative z-10 text-neutral-900 dark:text-white"
             >
                 {children}
             </motion.span>

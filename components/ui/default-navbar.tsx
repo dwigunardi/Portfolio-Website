@@ -103,7 +103,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
     <motion.div
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium text-white transition duration-200 hover:text-zinc-800 lg:flex lg:space-x-2",
+        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium dark:text-white transition duration-200 hover:text-zinc-800 lg:flex lg:space-x-2",
         className
       )}
     >
@@ -111,7 +111,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
         <Link
           onMouseEnter={() => setHovered(idx)}
           onClick={(e) => onItemClick && onItemClick(e, item)}
-          className="relative px-4 py-2 text-neutral-100 cursor-pointer"
+          className="relative px-4 py-2 dark:text-white text-neutral-500 hover:text-white cursor-pointer"
           key={`link-${idx}`}
           href={item.link}
         >
@@ -196,7 +196,7 @@ export const MobileNavToggle = ({ isOpen, onClick }: { isOpen: boolean; onClick:
   );
 };
 
-export const NavbarLogo = () => {
+export const NavbarLogo = ({ theme }: { theme: string }) => {
   return (
     // <a href="#home" className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black">
     //   <Image
@@ -206,7 +206,7 @@ export const NavbarLogo = () => {
     //     height={30}
     //   />
     // </a>
-    <Link href="/" className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black">
+    <Link href="/" className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black dark:text-white">
       <LogoTech />
     </Link>
   );

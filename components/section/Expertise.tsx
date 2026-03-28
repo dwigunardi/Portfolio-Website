@@ -58,7 +58,7 @@ export default function Expertise() {
     const [activeItem, setActiveItem] = useState<string>(cardItems[0].value);
     const activeData = cardItems.find((item) => item.value === activeItem) || cardItems[0];
     return (
-        <section id="expertise" className="relative w-full text-justify mx-auto flex flex-col gap-10 max-w-7xl text-white">
+        <section id="expertise" className="relative w-full text-justify mx-auto flex flex-col gap-10 max-w-7xl text-neutral-800 dark:text-white">
             <div className="container w-full mx-auto py-20 flex flex-col items-start justify-start gap-10 text-start">
                 <div className="flex flex-col items-start justify-start gap-5 text-start">
                     <AnimatedContent
@@ -115,7 +115,7 @@ export default function Expertise() {
                     delay={0}
                 >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                        <Card className="min-w-full bg-[##111116] backdrop-blur-sm border-neutral-700 text-white">
+                        <Card className="min-w-full bg-[##111116] backdrop-blur-sm border-neutral-700 text-neutral-800 dark:text-white">
                             <CardContent>
                                 <Accordion
                                     type="single"
@@ -127,7 +127,7 @@ export default function Expertise() {
                                     {cardItems.map((item) => (
                                         <AccordionItem key={item.value} value={item.value}>
                                             <AccordionTrigger className="text-xl">{item.trigger}</AccordionTrigger>
-                                            <AccordionContent className="text-base text-neutral-300 leading-relaxed pb-4 pt-1">{item.content}</AccordionContent>
+                                            <AccordionContent className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed pb-4 pt-1">{item.content}</AccordionContent>
                                         </AccordionItem>
                                     ))}
                                 </Accordion>

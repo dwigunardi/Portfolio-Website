@@ -27,10 +27,10 @@ export default function HeroBanner() {
 
     return (
         <section className="w-full min-h-screen" id="hero-section">
-            <div className="container mx-auto h-screen relative">
+            <div className="container mx-auto h-full relative">
                 <div className="grid grid-cols-12">
-                    <div className="col-span-6">
-                        <div className="relative">
+                    <div className="col-span-12 md:col-span-6 order-2 md:order-1">
+                        <div className="relative hidden md:block">
                             <div className="absolute top-40 -right-40 w-full h-full z-50">
                                 <AnimatedContent
                                     distance={100}
@@ -56,8 +56,8 @@ export default function HeroBanner() {
                         </div>
                         <Lanyard position={[0, 0, 12]} gravity={[0, -40, 0]} />
                     </div>
-                    <div className="col-span-6">
-                        <div className="flex flex-col gap-4 items-start justify-center h-full">
+                    <div className="col-span-12 md:col-span-6 order-1 md:order-2">
+                        <div className="flex flex-col gap-4 items-center md:items-start justify-center h-full">
                             <AnimatedContent
                                 distance={100}
                                 direction="horizontal"
@@ -70,7 +70,7 @@ export default function HeroBanner() {
                                 threshold={0.1}
                                 delay={0}
                             >
-                                <div className="flex items-center gap-2">
+                                <div className="flex flex-col md:flex-row grow items-center gap-4 w-full mt-40 md:mt-0">
                                     <h1 className="text-2xl font-bold text-white">I`m Ready to Code</h1>
                                     <RotatingText
                                         texts={['Web Development', 'Web Design', 'Web Developer', 'Vibe Coder!']}
@@ -86,7 +86,7 @@ export default function HeroBanner() {
                                     />
                                 </div>
                             </AnimatedContent>
-                            <div className="flex flex-col items-start gap-2 mt-4">
+                            <div className="flex flex-col items-center md:items-start gap-2 mt-4">
                                 <SplitText
                                     text="Hi, I'm Dwi Gunardi M"
                                     className="text-6xl font-semibold text-center text-white"
@@ -120,7 +120,7 @@ export default function HeroBanner() {
                                     delay={50}
                                     animateBy="words"
                                     direction="top"
-                                    className="text-2xl mb-8 text-white/80 max-w-2xl text-justify"
+                                    className="text-2xl mb-8 px-4 md:px-0 text-white/80 max-w-2xl items-center md:items-start justify-center md:justify-start"
                                 />
                                 <div className="flex items-start gap-4 mt-4">
                                     <motion.div

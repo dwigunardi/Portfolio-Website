@@ -246,7 +246,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
                         <mesh geometry={nodes.clamp.geometry} material={materials.metal} />
                         {hovered && !dragged && (
                             <Html
-                                position={[0.53, 0.5, 0]}
+                                position={!isMobile ? [0.53, 0.5, 0] : [0.0, -0.1, 0]}
                                 center
                                 wrapperClass="pointer-events-none"
                             >

@@ -22,7 +22,7 @@ export default function NewHeroSection() {
 
     return (
         // 1. WRAPPER TERLUAR: Lebar penuh layar, mengontrol tinggi, dan menampung background
-        <section className="relative w-full min-h-screen overflow-hidden bg-neutral-950 flex items-center">
+        <section className="relative w-full min-h-screen overflow-hidden dark:bg-neutral-950 flex items-center">
             
             {/* 2. BACKGROUND ANIMASI: Sekarang ada di dalam Hero, akan otomatis mengikuti tingginya */}
             <BackgroundSection enableWaves={['top', 'bottom']} />
@@ -35,7 +35,7 @@ export default function NewHeroSection() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: baseDelay }}
                     >
-                        <p className="text-neutral-300 mb-4 flex items-center gap-3 text-lg">
+                        <p className="dark:text-neutral-300 mb-4 flex items-center gap-3 text-lg">
                             <span className="inline-flex items-center gap-1">
                                 <Hand className="animate-wave-animation text-blue-500" size={28} />
                             </span>
@@ -48,7 +48,7 @@ export default function NewHeroSection() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: baseDelay + 0.2 }}
                     >
-                        <h1 className="text-5xl leading-[1.1] text-white md:text-6xl lg:w-4/5 lg:text-7xl font-bold">
+                        <h1 className="text-5xl leading-[1.1] dark:text-white md:text-6xl lg:w-4/5 lg:text-7xl font-bold">
                             Coding immersive <span className="text-blue-500">web experiences</span> that look great and feel <span className="text-blue-500">even better</span>.
                         </h1>
                     </motion.div>
@@ -59,8 +59,8 @@ export default function NewHeroSection() {
                         transition={{ duration: 0.8, delay: baseDelay + 0.4 }}
                         className="mt-8 flex flex-col gap-6 md:flex-row md:items-center"
                     >
-                        <div className="bg-neutral-200 h-px w-full md:w-32 hidden md:block"></div>
-                        <p className="w-full text-neutral-200 text-lg md:text-xl leading-relaxed lg:w-2/3">
+                        <div className="bg-neutral-900 dark:bg-neutral-200 h-px w-full md:w-32 hidden md:block"></div>
+                        <p className="w-full dark:text-neutral-200 text-lg md:text-xl leading-relaxed lg:w-2/3">
                             I work with professionals who are passionate about building pixel-perfect, engaging, and accessible digital experiences that drive results and achieve business goals.
                         </p>
                     </motion.div>
@@ -81,7 +81,7 @@ export default function NewHeroSection() {
                                     <Link
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="flex items-center gap-1 text-sm md:text-base font-medium uppercase text-neutral-400 hover:text-white transition-colors duration-300"
+                                        className="flex items-center gap-1 text-sm md:text-base font-medium uppercase text-neutral-500 hover:text-blue-primary dark:text-neutral-400 dark:hover:text-white transition-colors duration-300"
                                         href={link.url}
                                     >
                                         {link.name}

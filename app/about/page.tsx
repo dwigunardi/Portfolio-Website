@@ -8,113 +8,58 @@ import HeroBanner from "@/components/section/AboutMeHeroBanner";
 import ShinyText from "@/components/ShinyText";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card, CardContent } from "@/components/ui/card";
-import { motion } from "framer-motion"; // Pastikan import framer-motion yang benar
 import Image from "next/image";
 import { useState } from "react";
 import ZoomOutSection from "@/components/section/ZoomOutSection";
+import { EXPERIENCE_DATA } from "@/const/WorkTimelineData";
 
 export default function AboutPage() {
-    // Data Work History disesuaikan dengan struktur layout yang baru
-    const cardItems = [
-        {
-            value: "ibm",
-            trigger: (
-                <div className="flex flex-1 w-full items-center justify-between pr-2 md:pr-6">
-                    {/* Bagian Kiri: Logo + Detail */}
-                    <div className="flex items-center gap-4">
-                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/5 border border-white/10 p-2 shadow-inner">
-                            <Image src={'/assets/company-logo/ibm-logo.webp'} width={32} height={32} alt="IBM Logo" className="object-contain" />
-                        </div>
-                        <div className="flex flex-col items-start text-left">
-                            <span className="text-base md:text-lg font-bold text-white leading-tight">PT. IBM Delivery Indonesia</span>
-                            <span className="text-sm font-medium text-blue-400 mt-1">Application Developer</span>
-                        </div>
+    const cardItems = EXPERIENCE_DATA.map((item, index) => ({
+        value: item.value,
+        trigger: (
+            <div className="flex flex-1 w-full items-center justify-between pr-2 md:pr-6">
+                <div className="flex items-center gap-4">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-neutral-100 dark:bg-white/5 border border-neutral-200 dark:border-white/10 p-2 shadow-inner transition-colors">
+                        <Image 
+                            src={item.logo} 
+                            width={32} 
+                            height={32} 
+                            alt={`${item.company} Logo`} 
+                            className="object-contain" 
+                        />
                     </div>
-                    {/* Bagian Kanan: Tahun Aktif */}
-                    <div className="text-xs md:text-sm font-medium text-neutral-500 text-right">
-                        04/2024 — Present
-                    </div>
-                </div>
-            ),
-            content: (
-                <div className="flex flex-col gap-4">
-                    <ul className="list-disc list-inside text-base text-neutral-400 leading-relaxed">
-                        <li>Currently assigned as a consultant for PT. Bank Raya Tbk. I specialize in building responsive and performant web applications using modern frameworks like React and Next.js, ensuring scalable and maintainable codebases for enterprise-level systems.</li>
-                        <li>Collaborated with cross-functional teams to design and implement front-office web applications, ensuring seamless integration with backend services and APIs.</li>
-                        <li>Optimized application performance and implemented best practices for code quality, resulting in improved user experience and maintainability.</li>
-                        <li>Utilized Git for version control, ensuring smooth collaboration and code management in fast-paced team environments.</li>
-                        <li>Ticketed and prioritized tasks, ensuring efficient project delivery and meeting deadlines.</li>
-                        <li>Brainstormed and implemented innovative solutions to address complex business requirements, resulting in enhanced functionality and user satisfaction.</li>
-                        <li>Conducted regular code reviews and provided constructive feedback to fellow developers, fostering a culture of continuous improvement.</li>
-                    </ul>
-                </div>
-            ),
-        },
-        {
-            value: "Pt. ACSA",
-            trigger: (
-                <div className="flex flex-1 w-full items-center justify-between pr-2 md:pr-6">
-                    <div className="flex items-center gap-4">
-                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/5 border border-white/10 p-2 shadow-inner">
-                            <Image src={'/assets/company-logo/ACSA.webp'} width={32} height={32} alt="Bank Raya Logo" className="object-contain" />
-                        </div>
-                        <div className="flex flex-col items-start text-left">
-                            <span className="text-base md:text-lg font-bold text-white leading-tight">PT. ACSA</span>
-                            <span className="text-sm font-medium text-blue-400 mt-1">Frontend Developer</span>
-                        </div>
-                    </div>
-                    <div className="text-xs md:text-sm font-medium text-neutral-500 text-right">
-                        05/2022 — 04/2024
+                    <div className="flex flex-col items-start text-left">
+                        <span className="text-base md:text-lg font-bold text-neutral-900 dark:text-white leading-tight transition-colors">
+                            {item.company}
+                        </span>
+                        <span className="text-sm font-medium text-blue-600 dark:text-blue-400 mt-1 transition-colors">
+                            {item.role}
+                        </span>
                     </div>
                 </div>
-            ),
-            content: (
-                <div className="flex flex-col gap-4">
-                    <ul className="list-disc list-inside text-base text-neutral-400 leading-relaxed">
-                        <li>Developed and maintained internal dashboard applications for Various Client Projects, utilizing React.js and Next.js, React Native, Code Igniter, and Bootstrap to create responsive and user-friendly interfaces.</li>
-                        <li>Collaborated with cross-functional teams to design and implement front-office web applications, ensuring seamless integration with backend services and APIs.</li>
-                        <li>Optimized application performance and implemented best practices for code quality, resulting in improved user experience and maintainability.</li>
-                        <li>Utilized Git for version control, ensuring smooth collaboration and code management in fast-paced team environments.</li>
-                        <li>Integrated APIs and third-party services, enhancing the functionality and functionality of the application.</li>
-                    </ul>
-                    </div>
-            ),
-        },
-        {
-            value: "side-project",
-            trigger: (
-                <div className="flex flex-1 w-full items-center justify-between pr-2 md:pr-6">
-                    <div className="flex items-center gap-4">
-                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/5 border border-white/10 p-2 shadow-inner">
-                            <Image src={'/assets/company-logo/The-Dev-Logo.webp'} width={32} height={32} alt="Xsis Logo" className="object-contain" />
-                        </div>
-                        <div className="flex flex-col items-start text-left">
-                            <span className="text-base md:text-lg font-bold text-white leading-tight">Freelance Projects</span>
-                            <span className="text-sm font-medium text-blue-400 mt-1">Frontend Developer</span>
-                        </div>
-                    </div>
-                    <div className="text-xs md:text-sm font-medium text-neutral-500 text-right">
-                        2020 — Present
-                    </div>
+                {/* Bagian Kanan: Tahun Aktif */}
+                <div className="text-xs md:text-sm font-medium text-neutral-500 dark:text-neutral-400 text-right transition-colors">
+                    {item.period}
                 </div>
-            ),
-            content: (
-                <div className="flex flex-col gap-4">
-                    <ul className="list-disc list-inside text-base text-neutral-400 leading-relaxed">
-                        <li>Developed and maintained personal and open-source projects, showcasing skills in frontend development and problem-solving.</li>
-                        <li>Explored various frameworks and technologies to create responsive and user-friendly interfaces.</li>
-                        <li>Collaborated With Teams to design and implement front-office web applications, ensuring seamless integration with backend services and APIs.</li>
-                        <li>Brainstormed and implemented innovative solutions to address complex business requirements, resulting in enhanced functionality and user satisfaction.</li>
-                    </ul>
-                </div>
-            ),
-        },
-    ];
+            </div>
+        ),
+        content: (
+            <div className="flex flex-col gap-4">
+                <ul className="list-disc list-inside text-base text-neutral-700 dark:text-neutral-400 leading-relaxed transition-colors">
+                    {item.descriptions.map((desc, descIdx) => (
+                        <li key={`desc-${index}-${descIdx}`} className="mb-2 last:mb-0">
+                            {desc}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        ),
+    }));
 
     const [activeItem, setActiveItem] = useState<string>(cardItems[0].value);
 
     return (
-        <div className="min-h-screen bg-neutral-950 flex flex-col selection:bg-blue-500/30">
+        <div className="min-h-screen dark:bg-neutral-950 flex flex-col selection:bg-blue-500/30">
             <NavigationBarTop />
             <div className="fixed inset-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/20 via-neutral-950 to-neutral-950 pointer-events-none z-0" />
             <BackgroundSection enableWaves={['middle', 'bottom']} />
@@ -140,8 +85,8 @@ export default function AboutPage() {
                                     direction="left"
                                     className="text-2xl"
                                 />
-                                <h1 className="text-4xl font-bold text-white">Team Contribution</h1>
-                                <p className="text-white/70 text-lg leading-relaxed">
+                                <h1 className="text-4xl font-bold dark:text-white">Team Contribution</h1>
+                                <p className="dark:text-white/70 text-lg leading-relaxed">
                                     My professional journey involves collaborating with cross-functional teams to create responsive, scalable, and user-friendly enterprise applications.
                                 </p>
                             </div>
@@ -168,11 +113,10 @@ export default function AboutPage() {
                                                 value={item.value}
                                                 className="border-neutral-800 px-2 md:px-4"
                                             >
-                                                {/* hover:no-underline agar desain kartu tetap bersih saat di-hover */}
-                                                <AccordionTrigger className="hover:no-underline py-6">
+                                                <AccordionTrigger className="hover:no-underline py-6 text-neutral-800 dark:text-white">
                                                     {item.trigger}
                                                 </AccordionTrigger>
-                                                <AccordionContent className="text-base text-neutral-400 leading-relaxed pb-6 pt-2 pl-4 md:pl-20 pr-4">
+                                                <AccordionContent className="text-base dark:text-neutral-400 leading-relaxed pb-6 pt-2 pl-4 md:pl-20 pr-4">
                                                     {item.content}
                                                 </AccordionContent>
                                             </AccordionItem>

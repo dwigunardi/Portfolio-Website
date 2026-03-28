@@ -199,7 +199,12 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 void main() {
   vec4 color = vec4(0.0);
   mainImage(color, gl_FragCoord.xy);
-  gl_FragColor = color;
+  
+  // Hitung intensitas warna untuk dijadikan nilai Alpha (Transparansi)
+  float alpha = max(color.r, max(color.g, color.b));
+  
+  // Terapkan alpha agar warna hitam menjadi transparan, dan kalikan 1.5 agar garis tetap tebal
+  gl_FragColor = vec4(color.rgb, clamp(alpha * 1.5, 0.0, 1.0));
 }
 `;
 
@@ -309,6 +314,9 @@ export default function FloatingLines({
     camera.position.z = 1;
 
     const renderer = new WebGLRenderer({ antialias: true, alpha: false });
+    renderer.setClearColor(0x000000, 0); 
+    
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.domElement.style.width = '100%';
     renderer.domElement.style.height = '100%';
