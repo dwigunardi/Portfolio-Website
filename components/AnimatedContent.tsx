@@ -105,9 +105,14 @@ const AnimatedContent: React.FC<AnimatedContentProps> = ({
       onEnter: () => tl.play()
     });
 
+    const timeoutId = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 500);
+
     return () => {
       st.kill();
       tl.kill();
+      clearTimeout(timeoutId);
     };
   }, [
     container,

@@ -6,7 +6,7 @@ import ScrollRevealText from "../ScrollRevealText";
 
 export default function AboutMe() {
     return (
-        <section id="about-me" className="text-center mx-auto max-w-full flex flex-col gap-10">
+        <section id="about-me" className="text-center mx-auto flex flex-col gap-10">
             <AnimatedContent
                 distance={100}
                 direction="horizontal"

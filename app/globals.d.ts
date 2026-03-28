@@ -54,3 +54,8 @@ declare global {
 declare module '*.glb';
 declare module '*.png';
 declare module '*.css';
+declare module '*.pdf';
+declare module '@/public/assets/CV/CV-Dwi-Gunardi-M.pdf' {
+  const content: ArrayBuffer;
+  export default content;
+}

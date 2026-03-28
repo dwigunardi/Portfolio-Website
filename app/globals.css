@@ -10,6 +10,8 @@
   --color-blue-primary: #38b6ff;
   --color-red-primary: #FF0000;
   --color-green-primary: "#C6F10E";
+  --animate-wave-animation: wave-animation 2.5s infinite;
+  --max-screen: max-screen;
 }
 
 @theme inline {
@@ -146,4 +148,158 @@
     font-family: var(--font-poppins), sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     scroll-behavior: smooth;
   }
+
+  .wave-animation {
+    animation-name: wave-animation;
+    /* Refers to the name of your @keyframes element below */
+    animation-duration: 2.5s;
+    /* Change to speed up or slow down */
+    animation-iteration-count: infinite;
+    /* Never stop waving :) */
+    transform-origin: 70% 70%;
+    /* Pivot around the bottom-left palm */
+    display: inline-block;
+  }
+  
+  .max-screen {
+        width: 100%
+    }
+
+    @media (min-width: 40rem) {
+        .max-screen {
+            max-width:40rem
+        }
+    }
+
+    @media (min-width: 48rem) {
+        .max-screen {
+            max-width:48rem
+        }
+    }
+
+    @media (min-width: 64rem) {
+        .max-screen {
+            max-width:64rem
+        }
+    }
+
+    @media (min-width: 80rem) {
+        .max-screen {
+            max-width:80rem
+        }
+    }
+
+    @media (min-width: 96rem) {
+        .max-screen {
+            max-width:96rem
+        }
+    }
+
+    .max-screen {
+        margin-inline:auto;padding-inline:1rem}
+
+    @media (min-width: 40rem) {
+        .max-screen {
+            max-width:none
+        }
+    }
+
+    @media (min-width: 480px) {
+        .max-screen {
+            max-width:480px
+        }
+    }
+
+    @media (min-width: 640px) {
+        .max-screen {
+            max-width:640px
+        }
+    }
+
+    @media (min-width: 768px) {
+        .max-screen {
+            max-width:768px;
+            padding-inline:1.5rem}
+    }
+
+    @media (min-width: 1024px) {
+        .max-screen {
+            max-width:1024px;
+            padding-inline:2rem}
+    }
+
+    @media (min-width: 1280px) {
+        .max-screen {
+            max-width:1280px
+        }
+    }
+
+  @keyframes wave-animation {
+    0% {
+      transform: rotate(0.0deg)
+    }
+
+    10% {
+      transform: rotate(14.0deg)
+    }
+
+    /* The following five values can be played with to make the waving more or less extreme */
+    20% {
+      transform: rotate(-8.0deg)
+    }
+
+    30% {
+      transform: rotate(14.0deg)
+    }
+
+    40% {
+      transform: rotate(-4.0deg)
+    }
+
+    50% {
+      transform: rotate(10.0deg)
+    }
+
+    60% {
+      transform: rotate(0.0deg)
+    }
+
+    /* Reset for the last half to pause */
+    100% {
+      transform: rotate(0.0deg)
+    }
+  }
+}
+/* globals.css */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.horizontal-scroll-container {
+  /* Give the section a height to control how long the vertical scroll interaction lasts */
+  height: 200vh; 
+  overflow: hidden; /* Hide the actual horizontal overflow */
+  position: relative;
+}
+
+.horizontal-content-wrapper {
+  /* Keep the wrapper fixed in the viewport while scrolling */
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  /* Use flexbox to arrange items horizontally with a large total width */
+  display: flex;
+  width: 400%; /* Example: 4x the viewport width for 4 items */
+  align-items: center;
+}
+
+.item {
+  width: 100vw; /* Each item takes up the full viewport width */
+  flex-shrink: 0;
+  padding: 20px;
+  /* Add styling for your items */
 }

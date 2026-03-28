@@ -1,14 +1,32 @@
+'use client';
+
 import AnimatedContent from "@/components/AnimatedContent";
 import BlurText from "@/components/BlurText";
 import CircularText from "@/components/CircularText";
-import GradientText from "@/components/GradientText";
+import { motion } from "framer-motion";
 import Lanyard from "@/components/lanyard";
 import RotatingText from "@/components/RotatingText";
 import SplitText from "@/components/SplitText";
+import { SlideInButton } from "../common/SlideInButton";
+import { ArrowUpRight } from "lucide-react";
+import InfiniteCard from "../infiniteCard";
+import { techStacks } from "./Expertise";
 
 export default function HeroBanner() {
+
+    const handleDownloadResume = () => {
+        if(typeof document !== "undefined") {
+            const link = document.createElement('a');
+            link.href = '/assets/CV/CV-Dwi-Gunardi-Meinaki.pdf';
+            link.download = 'Dwi_Gunardi_M_Resume.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    }
+
     return (
-        <section className="w-full h-screen">
+        <section className="w-full min-h-screen" id="hero-section">
             <div className="container mx-auto h-screen relative">
                 <div className="grid grid-cols-12">
                     <div className="col-span-6">
@@ -105,21 +123,33 @@ export default function HeroBanner() {
                                     className="text-2xl mb-8 text-white/80 max-w-2xl text-justify"
                                 />
                                 <div className="flex items-start gap-4 mt-4">
-                                    <GradientText
-                                        colors={["#38b6ff", "#B19EEF"]}
-                                        animationSpeed={6}
-                                        showBorder
-                                        yoyo
-                                        className="px-6 py-4 rounded-md text-sm font-medium"
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.8, delay: 0.2 }}
+                                        className="mt-12 flex flex-col justify-between gap-12 lg:gap-8 lg:flex-row lg:items-center"
                                     >
-                                        Add a splash of color!
-                                    </GradientText>
+
+                                        <SlideInButton
+                                            initialText="My Resume"
+                                            hoverText="Download!"
+                                            icon={<ArrowUpRight size={18} />}
+                                            onClick={() => handleDownloadResume()}
+                                            initialFill="bg-neutral-900"
+                                            hoverFill="bg-gradient-to-r from-blue-500 to-purple-500"
+                                            initialTextColor="text-white"
+                                            hoverTextColor="text-white"
+                                            hasBorder={false}
+                                            className="flex items-center gap-2 mt-4 cursor-pointer transition-all duration-300 py-7 lg:py-5 px-10 lg:px-8"
+                                        />
+                                    </motion.div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <InfiniteCard items={techStacks} direction="left" speed={0.1} />
         </section>
     )
 }

@@ -1,50 +1,66 @@
-import ScrollVelocity from "@/components/ScrollVelocity";
 import type { Metadata } from "next";
-import HeroBanner from "../components/section/heroBanner";
-import Squares from "@/components/Squares";
-import { NavigationBar } from "@/components/common/NavigationBar";
-import FloatingLines from "@/components/FloatingLines";
 import { WorkTimeLine } from "@/components/section/WorkTimeLine";
 import AboutMe from "@/components/section/AboutMe";
 import Expertise from "@/components/section/Expertise";
+import NewHeroSection from "@/components/section/NewHeroSection";
+import NavigationBarTop from "@/components/common/NavigationBarTop";
+import MarqueeSection from "@/components/section/MarqueeSection";
+import ZoomOutSection from "@/components/section/ZoomOutSection";
+import CatchPharaseSetion from "@/components/section/CatchphraseScrollSequence";
+import Footer from "@/components/common/FooterSection";
 
 export const metadata: Metadata = {
   title: "Home - Dwi Gunardi M Portfolio",
-  description: "Welcome to my portfolio website! I'm Dwi Gunardi M, a passionate frontend developer specializing in crafting engaging and user-friendly web experiences. Explore my projects, skills, and contact information to see how I can bring your ideas to life with clean code and innovative design.",
+  description: "Welcome to my portfolio website! I'm Dwi Gunardi M...",
+  keywords: ["Dwi Gunardi M", "Frontend Developer", "Next.js", "React", "IBM Indonesia"],
 };
 
 export default function Home() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Dwi Gunardi Meinaki",
+      "alternateName": "Dwi",
+      "jobTitle": "Frontend Web Developer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "PT. IBM Indonesia"
+      },
+      "url": "https://dwigunardimeinaki.vercel.app",
+      "sameAs": [
+        "https://www.linkedin.com/in/dwi-gunardi/",
+        "https://github.com/dwigunardi"
+      ]
+    }
+  };
+
   return (
-    <div className="min-h-screen overflow-x-hidden bg-neutral-950" id="home">
-      <div className="absolute top-0 left-0 w-full h-full z-0">
-        <FloatingLines
-          enabledWaves={["top", "middle", "bottom"]}
-          // Array - specify line count per wave; Number - same count for all waves
-          lineCount={5}
-          // Array - specify line distance per wave; Number - same distance for all waves
-          lineDistance={5}
-          bendRadius={5}
-          bendStrength={-0.5}
-          interactive={true}
-          parallax={true}
-        />
-      </div>
-      <HeroBanner />
-      <ScrollVelocity
-        texts={['See More About Me', 'Scroll Down']}
-        velocity={100}
-        className="font-bold text-center text-white text-5xl"
+    <div className="bg-neutral-950" id="home">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {/* <div className="w-full h-full relative z-10">
-      </div> */}
+      <NavigationBarTop />
+
+      {/* NEW HERO SECTION */}
+      <NewHeroSection />
+
+      {/* PEMBATAS MARQUEE */}
+      <MarqueeSection />
+
+      {/* KONTEN BAWAH */}
       <div className="container mx-auto relative z-10">
-        <NavigationBar />
-        <div className="flex flex-col items-center justify-center gap-20 mt-32">
+        <div className="flex flex-col gap-20 mt-32 px-4 md:px-0">
           <AboutMe />
           <WorkTimeLine />
           <Expertise />
         </div>
       </div>
+       <CatchPharaseSetion />
+      <ZoomOutSection />
+      <Footer />
     </div>
   );
 }

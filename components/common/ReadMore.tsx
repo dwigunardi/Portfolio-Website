@@ -60,7 +60,7 @@ export default function ReadMore({
                     duration: 0.3,
                     ease: 'easeInOut',
                 }}
-                className="text-sm leading-relaxed"
+                className="text-base leading-relaxed"
                 style={{
                     lineHeight: `${lineHeight}rem`,
                 }}
