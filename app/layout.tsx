@@ -50,6 +50,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <meta name="google-site-verification" content="7zxm8DQfpEF5GELxvJB05R337OegQeJfz7eDXkfKv44" />
         <link rel="icon" href="favicon.ico" sizes="any" className="rounded-full" />
         <link
           rel="apple-touch-icon"
