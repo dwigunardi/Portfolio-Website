@@ -39,7 +39,7 @@ function CatchphraseDesktop() {
         <section ref={containerRef} className="relative w-full h-[250vh]">
             <div className="sticky top-0 w-full h-screen overflow-hidden flex flex-col items-center justify-center">
                 {/* Radial background mengikuti tema */}
-                <motion.div style={{ opacity: bgOpacity }} className="absolute inset-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-50 dark:from-blue-900/20 via-white dark:via-neutral-950 to-white dark:to-neutral-950 pointer-events-none transition-colors duration-300" />\
+                <motion.div style={{ opacity: bgOpacity }} className="absolute inset-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-50 dark:from-blue-900/20 via-white dark:via-neutral-950 to-white dark:to-neutral-950 pointer-events-none transition-colors duration-300" />
                 
                 <motion.div style={{ opacity: textOpacity, y: textY, scale: textScale, filter: textBlur }} className="absolute z-10 flex flex-col items-center text-center px-4 md:px-0 w-full">
                     <div className="mb-6 px-4 py-1.5 rounded-full border border-neutral-200 dark:border-neutral-800 bg-neutral-100/50 dark:bg-neutral-900/50 backdrop-blur-md text-sm font-medium text-blue-600 dark:text-blue-400 tracking-wide uppercase transition-colors">

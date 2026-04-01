@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     url: "https://dwigunardimeinaki.vercel.app/",
     siteName: "Dwi Gunardi M Portfolio",
     images: [{
-      url: "https://dwigunardimeinaki.vercel.app/og_dwi.png",
+      url: "https://dwigunardimeinaki.vercel.app/Logo-D.png",
       width: 1200,
       height: 630,
     }],
