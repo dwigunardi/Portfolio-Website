@@ -37,7 +37,7 @@ export function WorkTimeLine() {
                     maxHeight={150}
                     className="flex flex-col gap-4"
                 >
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                         {item.projects.map((project, pIndex) => (
                             <div key={`project-${index}-${pIndex}`} className="flex flex-col gap-4">
                                 <BorderGlow
@@ -52,7 +52,7 @@ export function WorkTimeLine() {
                                     colors={['#c084fc', '#f472b6', '#38bdf8']}
                                     className="rounded-lg! p-0.5 shadow-none!"
                                 >
-                                    <Image 
+                                    <Image
                                         src={project.imageSrc}
                                         alt={project.alt}
                                         width={500}

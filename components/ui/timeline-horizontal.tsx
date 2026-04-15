@@ -3,6 +3,7 @@
 import { ArrowRightCircleIcon } from "lucide-react";
 import { useScroll, useTransform, motion } from "motion/react";
 import { useRef } from "react";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 
 interface TimelineEntry {
   title: string;
@@ -33,9 +34,12 @@ export function TimelineMobile({
 
   return (
     <div ref={containerRef} style={{ height: `${totalScreens * 100}vh` }}>
-      <div className="sticky top-0 h-screen overflow-hidden flex items-center bg-white dark:bg-neutral-950 transition-colors duration-300">
+      {/* Menggunakan h-[100dvh] lebih disarankan di mobile agar tidak tertutup address bar */}
+      <div className="sticky top-0 h-[100dvh] overflow-hidden flex items-center bg-white dark:bg-neutral-950 transition-colors duration-300">
         <motion.div style={{ x }} className="flex will-change-transform">
-          <div className="w-screen h-screen shrink-0 flex flex-col justify-start">
+
+          {/* Halaman Judul Awal */}
+          <div className="w-screen h-[100dvh] shrink-0 flex flex-col justify-start">
             <div className="max-w-sm pl-6 pt-24">
               <div className="mb-6">
                 {typeof title === "string" ? (
@@ -56,23 +60,42 @@ export function TimelineMobile({
             </div>
           </div>
 
+          {/* Render Data Timeline */}
           {data.map((entry, index) => (
-            <div key={index} className="w-screen h-screen shrink-0 flex flex-col justify-center px-6">
+            <div key={index} className="w-screen h-[100dvh] shrink-0 flex flex-col justify-center px-6">
 
-              <div className="relative flex flex-col rounded-3xl border border-neutral-200 dark:border-neutral-800 bg-neutral-100/50 dark:bg-neutral-900/50 p-6 md:p-8 backdrop-blur-sm max-h-[80vh] overflow-y-auto scrollbar-hide shadow-lg">
-                <div className="mb-6 flex items-center gap-4 sticky top-0 py-2 z-10 w-full backdrop-blur-md">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-500/10 text-blue-500 border border-blue-500/20">
-                    <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
+              {/* PERBAIKAN CARD: h-fit, overflow-hidden */}
+              <Card className="relative flex flex-col rounded-3xl border-neutral-200 dark:border-neutral-800 bg-neutral-100/50 dark:bg-neutral-900/50 backdrop-blur-sm h-fit max-h-[85vh] overflow-hidden shadow-lg">
+
+                {/* PERBAIKAN HEADER: shrink-0 (agar tidak menyusut saat konten di bawahnya memanjang) */}
+                {/* Catatan: 'sticky' sudah tidak diperlukan karena CardContent di bawahnya yang akan di-scroll */}
+                <CardHeader className="shrink-0 z-10 w-full backdrop-blur-md bg-neutral-100/80 dark:bg-neutral-900/80 border-b border-neutral-200/50 dark:border-neutral-800/50 pb-4 pt-6 md:pt-8">
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-500/10 text-blue-500 border border-blue-500/20">
+                      <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
+                    </div>
+                    <CardTitle className="text-2xl font-bold text-neutral-900 dark:text-white">
+                      {entry.title}
+                    </CardTitle>
                   </div>
-                  <h3 className="text-2xl font-bold text-neutral-900 dark:text-white">{entry.title}</h3>
-                </div>
-                <p className="mb-2 text-sm font-semibold text-blue-600 dark:text-blue-400">{entry.description}</p>
-                <p className="mb-6 text-xs text-neutral-500 dark:text-neutral-400">{entry.date}</p>
 
-                <div className="w-full">
+                  <div className="mt-4 flex flex-col gap-1">
+                    <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">
+                      {entry.description}
+                    </p>
+                    <CardDescription className="text-xs text-neutral-500 dark:text-neutral-400">
+                      {entry.date}
+                    </CardDescription>
+                  </div>
+                </CardHeader>
+
+                {/* PERBAIKAN CONTENT: overflow-y-auto, overscroll-none, flex-1 */}
+                <CardContent className="w-full flex-1 overflow-y-auto overflow-x-hidden overscroll-none scrollbar-hide pt-6 pb-6 md:pb-8">
                   {entry.content}
-                </div>
-              </div>
+                </CardContent>
+
+              </Card>
+
             </div>
           ))}
 

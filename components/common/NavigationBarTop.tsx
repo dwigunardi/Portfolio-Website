@@ -17,7 +17,7 @@ import { useLenis } from "lenis/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, HomeIcon, UserRound, Mail } from "lucide-react";
 import { NAV_ITEMS } from "@/const/routes-list";
 
 export default function NavigationBarTop() {
@@ -45,11 +45,11 @@ export default function NavigationBarTop() {
 
     const handleItemClick = (e: React.MouseEvent<HTMLAnchorElement>, item: { name: string; link: string }) => {
         if (item.link.startsWith("#")) {
-            e.preventDefault(); 
+            e.preventDefault();
             if (item.link === "#home") {
-                lenis?.scrollTo(0); 
+                lenis?.scrollTo(0);
             } else {
-                lenis?.scrollTo(item.link); 
+                lenis?.scrollTo(item.link);
             }
         } else {
             router.push(item.link);
@@ -99,34 +99,41 @@ export default function NavigationBarTop() {
                         <MobileNavMenu
                             isOpen={isMobileMenuOpen}
                             onClose={() => setIsMobileMenuOpen(false)}
+                            className="flex flex-col justify-center items-center gap-4"
                         >
-                            {NAV_ITEMS.map((item, idx) => (
-                                <Link
-                                    key={`mobile-link-${idx}`}
-                                    href={item.link}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        setIsMobileMenuOpen(false);
-                                        
-                                        if (item.link.startsWith("#")) {
-                                            if (item.link === "#home") lenis?.scrollTo(0);
-                                            else lenis?.scrollTo(item.link);
-                                        } else {
-                                            router.push(item.link);
-                                        }
-                                    }}
-                                    className="relative text-neutral-600 dark:text-neutral-300 py-2 text-lg font-medium"
-                                >
-                                    <span className="block">{item.name}</span>
-                                </Link>
-                            ))}
-                            <div className="mt-6 pt-6 border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-between gap-4">
+                            <div className="flex justify-center items-center cursor-pointer flex-row gap-4">
+                                {NAV_ITEMS.map((item, idx) => (
+                                    <Link
+                                        key={`mobile-link-${idx}`}
+                                        href={item.link}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            setIsMobileMenuOpen(false);
+
+                                            if (item.link.startsWith("#")) {
+                                                if (item.link === "#home") lenis?.scrollTo(0);
+                                                else lenis?.scrollTo(item.link);
+                                            } else {
+                                                router.push(item.link);
+                                            }
+                                        }}
+                                        className="relative text-neutral-600 dark:text-neutral-300 py-2 text-lg font-medium"
+                                    >
+                                        {/* <span className="block">{item.name}</span> */}
+                                        <div className="px-10 py-5 bg-neutral-200 dark:bg-neutral-800 rounded-full hover:text-blue-primary! hover:bg-neutral-300 dark:hover:bg-neutral-700 hover:cursor-pointer transition-colors duration-300 flex items-center gap-2">
+                                            {item.iconName === "Home" ? <HomeIcon size={25} /> : item.iconName === "UserRound" ? <UserRound size={25} /> : item.iconName === "Mail" ? <Mail size={25} /> : null}
+                                            {item.name}
+                                        </div>
+                                    </Link>
+                                ))}
+                            </div>
+                            <div className="grow w-full pt-6 border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-center gap-4">
                                 <span className="text-neutral-600 dark:text-neutral-300 font-medium">Theme</span>
                                 <ThemeToggleButton />
                             </div>
                         </MobileNavMenu>
                     </MobileNav>
-                    
+
                 </Navbar>
             </div>
         </div>

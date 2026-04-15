@@ -1,7 +1,7 @@
 export const NAV_ITEMS = [
-    { name: "Home", link: "/" },
-    { name: "About Me", link: "/about" },
-    { name: "Contact", link: "/contact" },
+    { name: "Home", link: "/", iconName: 'Home' },
+    { name: "About Me", link: "/about", iconName: 'UserRound' },
+    { name: "Contact", link: "/contact", iconName: 'Mail' },
 ];
 
 export const SOCIAL_LINKS = [

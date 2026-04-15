@@ -56,9 +56,9 @@ export const Navbar = ({ children, className, isShrunk }: NavbarProps) => {
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
           ? React.cloneElement(
-              child as React.ReactElement<{ isShrunk?: boolean }>,
-              { isShrunk }
-            )
+            child as React.ReactElement<{ isShrunk?: boolean }>,
+            { isShrunk }
+          )
           : child
       )}
     </div>
@@ -190,9 +190,9 @@ export const MobileNavMenu = ({ children, className, isOpen, onClose }: MobileNa
 
 export const MobileNavToggle = ({ isOpen, onClick }: { isOpen: boolean; onClick: () => void }) => {
   return isOpen ? (
-    <IconX className="text-black dark:text-white" onClick={onClick} />
+    <IconX className="text-black dark:text-white cursor-pointer" onClick={onClick} />
   ) : (
-    <IconMenu2 className="text-black dark:text-white" onClick={onClick} />
+    <IconMenu2 className="text-black dark:text-white cursor-pointer" onClick={onClick} />
   );
 };
 
