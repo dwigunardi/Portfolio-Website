@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://dwigunardimeinaki.vercel.app/",
+    url: "https://dwigunardimeinaki.vercel.app/sitemap.xml",
     siteName: "Dwi Gunardi M Portfolio",
     images: [{
       url: "https://dwigunardimeinaki.vercel.app/Logo-D.png",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     }],
   },
   verification: {
-    google: "google-site-verification=7zxm8DQfpEF5GELxvJB05R337OegQeJfz7eDXkfKv44",
+    google: "7zxm8DQfpEF5GELxvJB05R337OegQeJfz7eDXkfKv44",
   },
 };
 
@@ -50,7 +50,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="google-site-verification" content="7zxm8DQfpEF5GELxvJB05R337OegQeJfz7eDXkfKv44" />
         <link rel="icon" href="favicon.ico" sizes="any" className="rounded-full" />
         <link
           rel="apple-touch-icon"

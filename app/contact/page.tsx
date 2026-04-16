@@ -40,13 +40,12 @@ export default function ContactPage() {
 
     try {
       const formData = new FormData();
-      formData.append("access_key", "8abadc3a-982a-4773-9474-47daecf1e90e"); 
+      formData.append("access_key", process.env.NEXT_PUBLIC_FORM_ACCESS_KEY || "");
       formData.append("name", data.name);
       formData.append("email", data.email);
       formData.append("message", data.message);
       formData.append("subject", `New Message from ${data.name} via Portfolio`);
-
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_FORM_ENDPOINT}/submit`, {
         method: "POST",
         body: formData,
       });
@@ -60,7 +59,7 @@ export default function ContactPage() {
           // PERBAIKAN: Toast theme support
           className: "bg-white text-neutral-900 border-neutral-200 dark:bg-neutral-950 dark:text-white dark:border-neutral-800 shadow-lg",
         });
-        form.reset(); 
+        form.reset();
       } else {
         throw new Error(result.message || "Failed to send message");
       }
@@ -79,9 +78,9 @@ export default function ContactPage() {
     <div className="min-h-screen h-full bg-white dark:bg-neutral-950 transition-colors duration-300 flex flex-col selection:bg-blue-500/30">
       <NavigationBarTop />
       <div className="fixed inset-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-50 via-white to-white dark:from-blue-900/20 dark:via-neutral-950 dark:to-neutral-950 pointer-events-none z-0 transition-colors duration-300" />
-      
-      <BackgroundSection enableWaves={['middle', 'bottom']} opacity={'50'}/>
-      
+
+      <BackgroundSection enableWaves={['middle', 'bottom']} opacity={'50'} />
+
       <main className="grow container mx-auto px-4 md:px-6 pt-32 pb-20 relative z-10 flex items-center justify-center" id="contact-me">
         <AnimatedContent
           distance={40}
@@ -115,7 +114,7 @@ export default function ContactPage() {
                   <p className="font-semibold text-neutral-900 dark:text-neutral-200 transition-colors">dwigunardi@gmail.com</p>
                 </div>
               </div>
-              
+
               <div className="flex items-center gap-4 text-neutral-600 dark:text-neutral-300">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-neutral-100 border border-neutral-200 dark:bg-neutral-900 dark:border-neutral-800 text-blue-600 dark:text-blue-400 shadow-inner transition-colors">
                   <IconMapPin size={22} />
@@ -212,16 +211,16 @@ export default function ContactPage() {
               </CardContent>
               <CardFooter className="pt-6 rounded-b-xl border-t border-neutral-200 dark:border-neutral-800 transition-colors">
                 <div className="w-full flex justify-end items-center gap-4 h-full">
-                  <Button 
-                    type="button" 
-                    variant="ghost" 
+                  <Button
+                    type="button"
+                    variant="ghost"
                     onClick={() => form.reset()}
                     className="text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:text-white dark:hover:bg-neutral-800 cursor-pointer transition-all"
                   >
                     Clear
                   </Button>
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     form="contact-form"
                     disabled={isSubmitting}
                     className="bg-blue-600 hover:bg-blue-700 text-white font-medium h-10 px-8 transition-all cursor-pointer disabled:bg-blue-400 disabled:cursor-not-allowed"
