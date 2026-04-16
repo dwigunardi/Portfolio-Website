@@ -6,6 +6,7 @@ import { Metadata } from "next";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "next-themes";
 import { Analytics } from "@vercel/analytics/next"
+import { GoogleTagManager } from '@next/third-parties/google'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -74,6 +75,7 @@ export default function RootLayout({
             </TooltipProvider>
           </SmoothScrollProvider>
         </ThemeProvider>
+        <GoogleTagManager gtmId="G-Y2W4T6YRCH" />
       </body>
     </html>
   );
