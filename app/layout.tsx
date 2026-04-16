@@ -2,11 +2,11 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/provider/SmoothScrollProvider";
-import { Metadata } from "next";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "next-themes";
 import { Analytics } from "@vercel/analytics/next"
-import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google'
+import { siteMetaData } from "@/const/metadata";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,30 +18,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "Dwi Gunardi M | Frontend Developer",
-    template: "%s | Dwi Gunardi M", // Jika nanti ada halaman /blog, judulnya otomatis "Blog | Dwi Gunardi M"
-  },
-  description: "Portfolio website of Dwi Gunardi M, a passionate Frontend Developer specializing in React and Next.js.",
-  applicationName: "Dwi Gunardi M Portfolio",
-  authors: [{ name: "Dwi Gunardi M", url: "https://github.com/dwigunardi" }],
-  creator: "Dwi Gunardi M",
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://dwigunardimeinaki.vercel.app/sitemap.xml",
-    siteName: "Dwi Gunardi M Portfolio",
-    images: [{
-      url: "https://dwigunardimeinaki.vercel.app/Logo-D.png",
-      width: 1200,
-      height: 630,
-    }],
-  },
-  verification: {
-    google: "7zxm8DQfpEF5GELxvJB05R337OegQeJfz7eDXkfKv44",
-  },
-};
+export const metadata = siteMetaData;
 
 export default function RootLayout({
   children,
@@ -75,7 +52,8 @@ export default function RootLayout({
             </TooltipProvider>
           </SmoothScrollProvider>
         </ThemeProvider>
-        <GoogleTagManager gtmId="G-Y2W4T6YRCH" />
+        <GoogleTagManager gtmId={process.env.GA_TRACKING_ID || ""} />
+        <GoogleAnalytics gaId={process.env.GA_TRACKING_ID || ""} />
       </body>
     </html>
   );
