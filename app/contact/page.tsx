@@ -5,7 +5,8 @@ import ContactForm from "@/components/section/ContactForm"
 
 export const metadata = {
   title: "Contact",
-  description: "Get in touch for freelance opportunities, project inquiries, or just to say hi.",
+  description: "Get in touch with Dwi Gunardi M for freelance opportunities, project inquiries, or collaboration.",
+  keywords: ["Contact", "Dwi Gunardi M", "Freelance", "Hire Developer", "Frontend Developer"],
 }
 
 export default function ContactPage() {

@@ -10,9 +10,9 @@ import CatchPharaseSetion from "@/components/section/CatchphraseScrollSequence";
 import Footer from "@/components/common/FooterSection";
 
 export const metadata: Metadata = {
-  title: "Home - Dwi Gunardi M Portfolio",
-  description: "Welcome to my portfolio website! I'm Dwi Gunardi M...",
-  keywords: ["Dwi Gunardi M", "Frontend Developer", "Next.js", "React", "IBM Indonesia"],
+  title: "Home",
+  description: "Welcome to my portfolio website! I'm Dwi Gunardi M, a Frontend Developer specializing in React, Next.js, and modern web technologies.",
+  keywords: ["Dwi Gunardi M", "Frontend Developer", "Next.js", "React", "IBM Indonesia", "Portfolio"],
 };
 
 export default function Home() {

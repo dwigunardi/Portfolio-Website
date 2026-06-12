@@ -11,19 +11,26 @@ import {
     MobileNavMenu,
 } from "@/components/ui/default-navbar";
 
-import { useMotionValueEvent, useScroll } from "motion/react";
+import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import { useState, useEffect } from "react";
 import { useLenis } from "lenis/react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { Sun, Moon, HomeIcon, UserRound, Mail } from "lucide-react";
+import { Sun, Moon, HomeIcon, UserRound, Mail, type LucideIcon } from "lucide-react";
 import { NAV_ITEMS } from "@/const/routes-list";
+
+const iconMap: Record<string, LucideIcon> = {
+    Home: HomeIcon,
+    UserRound: UserRound,
+    Mail: Mail,
+};
 
 export default function NavigationBarTop() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isShrunk, setIsShrunk] = useState(false);
     const router = useRouter();
+    const pathname = usePathname();
     const { theme, setTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
@@ -56,19 +63,23 @@ export default function NavigationBarTop() {
         }
     };
 
+    const isActiveRoute = (link: string) => {
+        if (link === "/") return pathname === "/";
+        return pathname.startsWith(link);
+    };
+
     const ThemeToggleButton = () => {
         if (!mounted) return <div className="w-10 h-10" />;
 
         return (
             <button
                 onClick={() => {
-                    console.log("Current theme:", theme);
                     setTheme(theme === "dark" ? "light" : "dark");
                 }}
                 className="cursor-pointer relative z-60 pointer-events-auto flex items-center justify-center w-10 h-10 rounded-full bg-neutral-200 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-700 transition-colors duration-300"
                 aria-label="Toggle Dark Mode"
             >
-                {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+                {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
             </button>
         );
     };
@@ -81,7 +92,6 @@ export default function NavigationBarTop() {
                     <NavBody isShrunk={isShrunk}>
                         <NavbarLogo theme={theme === "dark" ? "light" : "dark"} />
                         <NavItems items={NAV_ITEMS} onItemClick={handleItemClick} />
-                        {/* Tambahkan Theme Toggle di kanan Desktop */}
                         <div className="flex items-center gap-4 relative z-50 pointer-events-auto">
                             <ThemeToggleButton />
                         </div>
@@ -99,38 +109,89 @@ export default function NavigationBarTop() {
                         <MobileNavMenu
                             isOpen={isMobileMenuOpen}
                             onClose={() => setIsMobileMenuOpen(false)}
-                            className="flex flex-col justify-center items-center gap-4"
+                            className="items-stretch! gap-0! py-6! px-5!"
                         >
-                            <div className="flex justify-center items-center cursor-pointer flex-row gap-4">
-                                {NAV_ITEMS.map((item, idx) => (
-                                    <Link
-                                        key={`mobile-link-${idx}`}
-                                        href={item.link}
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            setIsMobileMenuOpen(false);
+                            {/* Nav Items — full width, left-aligned, staggered */}
+                            <nav className="flex flex-col w-full gap-1">
+                                {NAV_ITEMS.map((item, idx) => {
+                                    const Icon = iconMap[item.iconName];
+                                    const isActive = isActiveRoute(item.link);
 
-                                            if (item.link.startsWith("#")) {
-                                                if (item.link === "#home") lenis?.scrollTo(0);
-                                                else lenis?.scrollTo(item.link);
-                                            } else {
-                                                router.push(item.link);
-                                            }
-                                        }}
-                                        className="relative text-neutral-600 dark:text-neutral-300 py-2 text-lg font-medium"
-                                    >
-                                        {/* <span className="block">{item.name}</span> */}
-                                        <div className="px-10 py-5 bg-neutral-200 dark:bg-neutral-800 rounded-full hover:text-blue-primary! hover:bg-neutral-300 dark:hover:bg-neutral-700 hover:cursor-pointer transition-colors duration-300 flex items-center gap-2">
-                                            {item.iconName === "Home" ? <HomeIcon size={25} /> : item.iconName === "UserRound" ? <UserRound size={25} /> : item.iconName === "Mail" ? <Mail size={25} /> : null}
-                                            {item.name}
-                                        </div>
-                                    </Link>
-                                ))}
-                            </div>
-                            <div className="grow w-full pt-6 border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-center gap-4">
-                                <span className="text-neutral-600 dark:text-neutral-300 font-medium">Theme</span>
+                                    return (
+                                        <motion.div
+                                            key={`mobile-link-${idx}`}
+                                            initial={{ opacity: 0, x: -12 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{
+                                                delay: idx * 0.07,
+                                                duration: 0.3,
+                                                ease: "easeOut",
+                                            }}
+                                        >
+                                            <Link
+                                                href={item.link}
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    setIsMobileMenuOpen(false);
+
+                                                    if (item.link.startsWith("#")) {
+                                                        if (item.link === "#home") lenis?.scrollTo(0);
+                                                        else lenis?.scrollTo(item.link);
+                                                    } else {
+                                                        router.push(item.link);
+                                                    }
+                                                }}
+                                                className={`
+                                                    group relative flex items-center gap-4 w-full px-4 py-3.5 rounded-xl
+                                                    transition-all duration-200 ease-out
+                                                    ${isActive
+                                                        ? "bg-blue-500/10 dark:bg-blue-400/10 text-blue-600 dark:text-blue-400"
+                                                        : "text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800/60"
+                                                    }
+                                                `}
+                                            >
+                                                {/* Active indicator bar */}
+                                                <span
+                                                    className={`
+                                                        absolute left-0 top-1/2 -translate-y-1/2 w-[3px] rounded-full transition-all duration-200
+                                                        ${isActive ? "h-6 bg-blue-500 dark:bg-blue-400" : "h-0 bg-transparent"}
+                                                    `}
+                                                />
+
+                                                {/* Icon */}
+                                                <span className={`
+                                                    flex items-center justify-center w-10 h-10 rounded-lg
+                                                    transition-colors duration-200
+                                                    ${isActive
+                                                        ? "bg-blue-500/15 dark:bg-blue-400/15"
+                                                        : "bg-neutral-200/70 dark:bg-neutral-800 group-hover:bg-neutral-300/70 dark:group-hover:bg-neutral-700"
+                                                    }
+                                                `}>
+                                                    {Icon && <Icon size={20} />}
+                                                </span>
+
+                                                {/* Label */}
+                                                <span className="text-[15px] font-medium">
+                                                    {item.name}
+                                                </span>
+                                            </Link>
+                                        </motion.div>
+                                    );
+                                })}
+                            </nav>
+
+                            {/* Footer — theme toggle */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.25, duration: 0.3 }}
+                                className="mt-6 pt-4 border-t border-neutral-200/60 dark:border-neutral-800/60 flex items-center justify-between w-full px-4"
+                            >
+                                <span className="text-sm text-neutral-500 dark:text-neutral-400 font-medium">
+                                    Theme
+                                </span>
                                 <ThemeToggleButton />
-                            </div>
+                            </motion.div>
                         </MobileNavMenu>
                     </MobileNav>
 
