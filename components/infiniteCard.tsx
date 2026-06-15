@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useAnimationFrame, useMotionValue, useTransform, wrap } from "framer-motion";
+import { motion, useAnimationFrame, useMotionValue, useTransform, wrap } from "motion/react";
 import { cn } from "@/lib/utils";
 import React, { useRef, useState } from "react";
 
@@ -51,7 +51,7 @@ export default function InfiniteCard({
     return (
         <div 
             className={cn(
-                "relative flex w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]",
+                "relative flex w-full overflow-hidden mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]",
                 className
             )}
             onMouseEnter={() => setIsHovered(true)}

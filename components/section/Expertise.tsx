@@ -112,7 +112,7 @@ export default function Expertise() {
                     delay={0}
                 >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                        <Card className="min-w-full bg-[##111116] backdrop-blur-sm border-neutral-700 text-neutral-800 dark:text-white">
+                        <Card className="min-w-full backdrop-blur-sm border-neutral-700 text-neutral-800 dark:text-white">
                             <CardContent>
                                 <Accordion
                                     type="single"

@@ -21,7 +21,8 @@ export function WorkTimeLine() {
         title: item.title,
         date: item.date,
         description: item.description,
-        content: (
+        content: isDesktop ? (
+            // Desktop: full ReadMore + ShowMore experience
             <div key={`exp-parent-${index}`}>
                 <ReadMore
                     text={item.fullDetail}
@@ -69,6 +70,36 @@ export function WorkTimeLine() {
                         ))}
                     </div>
                 </ShowMore>
+            </div>
+        ) : (
+            // Mobile: flat content, no nested expand/collapse
+            <div key={`exp-parent-mobile-${index}`} className="flex flex-col gap-4">
+                <p className="text-sm font-normal text-neutral-800 dark:text-neutral-200 leading-relaxed">
+                    {item.fullDetail}
+                </p>
+                {item.projectsIntro ? (
+                    <p className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                        {item.projectsIntro}
+                    </p>
+                ) : null}
+                <div className="grid grid-cols-2 gap-3">
+                    {item.projects.map((project, pIndex) => (
+                        <div key={`project-m-${index}-${pIndex}`} className="flex flex-col gap-2">
+                            <Image
+                                src={project.imageSrc}
+                                alt={project.alt}
+                                width={300}
+                                height={200}
+                                className="w-full h-24 rounded-lg object-cover border border-neutral-200 dark:border-neutral-800"
+                            />
+                            {project.title ? (
+                                <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-tight">
+                                    {project.title}
+                                </p>
+                            ) : null}
+                        </div>
+                    ))}
+                </div>
             </div>
         )
     }));

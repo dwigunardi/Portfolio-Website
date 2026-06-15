@@ -5,10 +5,9 @@ import {
   motion,
   AnimatePresence,
 } from "motion/react";
-import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import { LogoGeometric, LogoTech } from "../common/Logo";
+import { LogoTech } from "../common/Logo";
 
 interface NavbarProps {
   children: React.ReactNode;
@@ -168,7 +167,7 @@ export const MobileNavHeader = ({ children, className }: MobileNavHeaderProps) =
   );
 };
 
-export const MobileNavMenu = ({ children, className, isOpen, onClose }: MobileNavMenuProps) => {
+export const MobileNavMenu = ({ children, className, isOpen }: MobileNavMenuProps) => {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -196,7 +195,7 @@ export const MobileNavToggle = ({ isOpen, onClick }: { isOpen: boolean; onClick:
   );
 };
 
-export const NavbarLogo = ({ theme }: { theme: string }) => {
+export const NavbarLogo = ({ }: { theme: string }) => {
   return (
     // <a href="#home" className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black">
     //   <Image

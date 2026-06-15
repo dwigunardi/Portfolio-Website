@@ -5,7 +5,7 @@ import SmoothScrollProvider from "@/components/provider/SmoothScrollProvider";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "next-themes";
 import { Analytics } from "@vercel/analytics/next"
-import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { siteMetaData } from "@/const/metadata";
 
 const geistSans = Geist({
@@ -52,7 +52,6 @@ export default function RootLayout({
             </TooltipProvider>
           </SmoothScrollProvider>
         </ThemeProvider>
-        <GoogleTagManager gtmId={process.env.GA_TRACKING_ID || ""} />
         <GoogleAnalytics gaId={process.env.GA_TRACKING_ID || ""} />
       </body>
     </html>

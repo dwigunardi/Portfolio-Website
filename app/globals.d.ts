@@ -1,16 +1,16 @@
-- src / global.d.ts
 export { };
 
 declare module '*.glb';
 declare module '*.png';
 declare module '*.css';
+declare module '*.pdf';
 
 declare module 'meshline' {
     export const MeshLineGeometry: any;
     export const MeshLineMaterial: any;
 }
 
-import { ThreeElements } from '@react-three/fiber'
+import type { ThreeElements } from '@react-three/fiber'
 
 declare global {
     namespace React {
@@ -21,41 +21,4 @@ declare global {
             }
         }
     }
-}
-
-declare module "react" {
-    namespace JSX {
-        interface IntrinsicElements {
-            "meshLineGeometry": any;
-            "meshLineMaterial": any;
-        }
-    }
-}
-
-declare global {
-    namespace JSX {
-        interface IntrinsicElements {
-            meshLineGeometry: any;
-            meshLineMaterial: any;
-        }
-    }
-}
-
-declare global {
-    namespace JSX {
-        interface IntrinsicElements {
-            meshLineGeometry: ReactThreeFiber.Object3DNode<any, any>
-            meshLineMaterial: ReactThreeFiber.Object3DNode<any, any>
-        }
-    }
-}
-- src / vite - env.d.ts
-/// <reference types="vite/client" />
-declare module '*.glb';
-declare module '*.png';
-declare module '*.css';
-declare module '*.pdf';
-declare module '@/public/assets/CV/CV-Dwi-Gunardi-M.pdf' {
-  const content: ArrayBuffer;
-  export default content;
 }

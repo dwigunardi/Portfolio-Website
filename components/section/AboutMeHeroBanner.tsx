@@ -3,7 +3,7 @@
 import AnimatedContent from "@/components/AnimatedContent";
 import BlurText from "@/components/BlurText";
 import CircularText from "@/components/CircularText";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import Lanyard from "@/components/lanyard";
 import RotatingText from "@/components/RotatingText";
 import SplitText from "@/components/SplitText";

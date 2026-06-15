@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { cn, introState } from "@/lib/utils";
@@ -35,7 +35,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
     return (
         <div key={pathname || "default"} className="w-full h-full">
             {showDoor && (
-                <div className="fixed inset-0 z-[100] pointer-events-none flex">
+                <div className="fixed inset-0 z-100 pointer-events-none flex">
                     
                     {/* LOGO DGM */}
                     <motion.div 

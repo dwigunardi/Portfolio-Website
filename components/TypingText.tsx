@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView } from 'motion/react';
 
 export function TypingEffect({ text = 'Typing Effect', className }: { text: string, className?: string }) {
     const ref = React.useRef(null);
@@ -9,7 +9,7 @@ export function TypingEffect({ text = 'Typing Effect', className }: { text: stri
     return (
         <h2
             ref={ref}
-            className={className || "text-xl text-center sm:text-4xl font-bold tracking-tighter md:text-6xl md:leading-[4rem]"}
+            className={className || "text-xl text-center sm:text-4xl font-bold tracking-tighter md:text-6xl md:leading-16"}
         >
             {text.split('').map((letter, index) => (
                 <motion.span
