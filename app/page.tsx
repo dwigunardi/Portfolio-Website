@@ -4,7 +4,6 @@ import AboutMe from "@/components/section/AboutMe";
 import Expertise from "@/components/section/Expertise";
 import NewHeroSection from "@/components/section/NewHeroSection";
 import NavigationBarTop from "@/components/common/NavigationBarTop";
-import MarqueeSection from "@/components/section/MarqueeSection";
 import ZoomOutSection from "@/components/section/ZoomOutSection";
 import CatchPharaseSetion from "@/components/section/CatchphraseScrollSequence";
 import Footer from "@/components/common/FooterSection";
@@ -44,11 +43,8 @@ export default function Home() {
       />
       <NavigationBarTop />
 
-      {/* NEW HERO SECTION */}
+      {/* NEW HERO SECTION (contains docked Marquee at bottom) */}
       <NewHeroSection />
-
-      {/* PEMBATAS MARQUEE */}
-      <MarqueeSection />
 
       {/* KONTEN BAWAH */}
       <div className="container mx-auto relative z-10">
