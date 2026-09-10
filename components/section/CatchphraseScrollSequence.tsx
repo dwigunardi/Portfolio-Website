@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
 import { useMediaQuery } from "@/hooks/use-media-query"; 
@@ -8,6 +8,47 @@ import { BREAKPOINTS } from "@/const/breakpoints";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { HIGHLIGHT_CARDS } from "@/const/tech-stack";
 import { ArrowRightCircle } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+function CardMedia({ video, poster, title }: { video: string; poster: string; title: string }) {
+    const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+
+    return (
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
+            {/* Shimmer / Skeleton background placeholder */}
+            <div className="absolute inset-0 bg-neutral-200/80 dark:bg-neutral-800/60 animate-pulse" />
+
+            {/* Poster image for instant initial paint (< 25 KB) */}
+            <Image
+                src={poster}
+                alt={title}
+                fill
+                priority
+                className={cn(
+                    "object-cover dark:mix-blend-screen transition-opacity duration-700",
+                    isVideoLoaded ? "opacity-0 pointer-events-none" : "opacity-90 dark:opacity-30"
+                )}
+            />
+
+            {/* Looping hardware-accelerated video */}
+            <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
+                poster={poster}
+                onPlaying={() => setIsVideoLoaded(true)}
+                className={cn(
+                    "absolute inset-0 w-full h-full object-cover dark:mix-blend-screen transition-opacity duration-500",
+                    isVideoLoaded ? "opacity-90 dark:opacity-30" : "opacity-0"
+                )}
+            >
+                <source src={video} type="video/mp4" />
+            </video>
+        </div>
+    );
+}
 
 export default function CatchphraseScrollSequence() {
     const isDesktop = useMediaQuery(BREAKPOINTS.md);
@@ -56,8 +97,8 @@ function CatchphraseDesktop() {
                 <motion.div style={{ opacity: cardsOpacity, y: cardsY, scale: cardsScale }} className="absolute z-20 w-full max-w-5xl mx-auto px-6 grid grid-cols-2 gap-8 pointer-events-none">
                     {HIGHLIGHT_CARDS.map((card, idx) => (
                         <Card key={idx} className={`relative overflow-hidden bg-white/80 dark:bg-neutral-900/80 border-neutral-200 dark:border-neutral-800 shadow-2xl h-80 flex flex-col justify-end pointer-events-none p-0 transition-colors ${idx % 2 === 0 ? "md:-translate-y-8" : "md:translate-y-8"}`}>
-                            <Image src={card.gif} alt={card.title} fill className="object-cover opacity-90 dark:opacity-30 dark:mix-blend-screen transition-opacity" unoptimized />
-                            <div className="absolute inset-0 bg-linear-to-t from-white via-white/80 dark:from-[#0a0a0a] dark:via-black/60 to-transparent" />
+                            <CardMedia video={card.video} poster={card.poster} title={card.title} />
+                            <div className="absolute inset-0 bg-linear-to-t from-white via-white/80 dark:from-[#0a0a0a] dark:via-black/60 to-transparent z-5" />
                             
                             <CardHeader className="relative z-10 pb-6 pt-0">
                                 <CardTitle className="text-3xl font-bold text-neutral-900 dark:text-white tracking-wide transition-colors">{card.title}</CardTitle>
@@ -109,14 +150,8 @@ function CatchphraseMobile() {
                     {HIGHLIGHT_CARDS.map((card, idx) => (
                         <div key={idx} className="w-screen h-screen shrink-0 flex flex-col justify-center items-center px-6 relative z-10">
                             <Card className="w-full max-w-sm relative overflow-hidden bg-white/80 dark:bg-neutral-900/80 border-neutral-200 dark:border-neutral-800 shadow-2xl h-[60vh] flex flex-col justify-end pointer-events-none p-0 transition-colors">
-                                <Image 
-                                    src={card.gif} 
-                                    alt={card.title}
-                                    fill
-                                    className="object-cover opacity-90 dark:opacity-30 dark:mix-blend-screen transition-opacity"
-                                    unoptimized 
-                                />
-                                <div className="absolute inset-0 bg-linear-to-t from-white via-white/15 dark:from-[#0a0a0a] dark:via-black/60 to-transparent transition-colors" />
+                                <CardMedia video={card.video} poster={card.poster} title={card.title} />
+                                <div className="absolute inset-0 bg-linear-to-t from-white via-white/15 dark:from-[#0a0a0a] dark:via-black/60 to-transparent transition-colors z-5" />
                                 <CardHeader className="relative z-10 pb-6 pt-0">
                                     <div className="w-10 h-10 mb-4 rounded-full bg-blue-100 dark:bg-blue-500/20 border border-blue-200 dark:border-blue-500/50 flex items-center justify-center transition-colors">
                                         <span className="text-blue-600 dark:text-blue-400 text-lg font-bold transition-colors">{idx + 1}</span>

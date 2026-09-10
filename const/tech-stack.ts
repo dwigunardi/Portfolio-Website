@@ -1,12 +1,33 @@
-type HighlightCard = {
+export type HighlightCard = {
     title: string;
     desc: string;
-    gif: string;
+    video: string;
+    poster: string;
 };
 
 export const HIGHLIGHT_CARDS: HighlightCard[] = [
-    { title: "Development", desc: "React, Next.js, Vue", gif: "https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" },
-    { title: "API Integration", desc: "REST, GraphQL", gif: "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3cDd5M2F4Yzk3azlhbm11MmkwZGNiNXVrZnNsZ2draGt6eTByZzJkaCZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/gXr3j6YAClXFfZABn5/giphy.gif" },
-    { title: "Version Control", desc: "Git, GitHub Actions", gif: "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3bGJicDEzcml4bzZkZTh2MXhrM3F2ZGloczY1ZmJjejdoNDAweWhvNSZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/PI3QGKFN6XZUCMMqJm/giphy.gif" },
-    { title: "CI/CD", desc: "Docker, Deployment", gif: "https://media.giphy.com/media/3o7TKSjRrfIPjeiVyM/giphy.gif" },
+    {
+        title: "Development",
+        desc: "React, Next.js, Vue",
+        video: "/assets/highlights/development.mp4",
+        poster: "/assets/highlights/development-poster.webp",
+    },
+    {
+        title: "API Integration",
+        desc: "REST, GraphQL",
+        video: "/assets/highlights/api-integration.mp4",
+        poster: "/assets/highlights/api-integration-poster.webp",
+    },
+    {
+        title: "Version Control",
+        desc: "Git, GitHub Actions",
+        video: "/assets/highlights/version-control.mp4",
+        poster: "/assets/highlights/version-control-poster.webp",
+    },
+    {
+        title: "CI/CD",
+        desc: "Docker, Deployment",
+        video: "/assets/highlights/cicd.mp4",
+        poster: "/assets/highlights/cicd-poster.webp",
+    },
 ];

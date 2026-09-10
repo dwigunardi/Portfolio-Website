@@ -153,7 +153,7 @@ export default function NavigationBarTop() {
                                                 {/* Active indicator bar */}
                                                 <span
                                                     className={`
-                                                        absolute left-0 top-1/2 -translate-y-1/2 w-[3px] rounded-full transition-all duration-200
+                                                        absolute left-0 top-1/2 -translate-y-1/2 w-0.75 rounded-full transition-all duration-200
                                                         ${isActive ? "h-6 bg-blue-500 dark:bg-blue-400" : "h-0 bg-transparent"}
                                                     `}
                                                 />

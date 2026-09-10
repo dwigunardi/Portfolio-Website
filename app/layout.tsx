@@ -39,6 +39,11 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png" />
         <link rel="manifest" href="/assets/favicon/site.webmanifest" />
         <link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+        {/* Preload critical highlight card posters for instant paint */}
+        <link rel="preload" as="image" href="/assets/highlights/development-poster.webp" />
+        <link rel="preload" as="image" href="/assets/highlights/api-integration-poster.webp" />
+        <link rel="preload" as="image" href="/assets/highlights/version-control-poster.webp" />
+        <link rel="preload" as="image" href="/assets/highlights/cicd-poster.webp" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

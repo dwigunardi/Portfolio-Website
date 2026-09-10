@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 type BackgroundSectionProps = {
     enableWaves?: Array<'top' | 'middle' | 'bottom'>;
-    opacity?: '5' | '10' | '20' | '30' | '40' | '50' | '60' | '70' | '80' | '90' | '100' ;
+    opacity?: '5' | '10' | '20' | '30' | '40' | '50' | '60' | '70' | '80' | '90' | '100';
 }
 
 const opacityMap: Record<string, string> = {

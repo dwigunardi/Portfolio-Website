@@ -3,7 +3,7 @@
 import { Hand, ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 import { SlideInButton } from "@/components/common/SlideInButton";
-import BackgroundSection from "@/components/section/Background"; // Sesuaikan path dengan lokasi BackgroundSection Anda
+import BackgroundSection from "@/components/section/Background";
 import Link from "next/link";
 import { introState } from "@/lib/utils";
 import { SOCIAL_LINKS } from "@/const/routes-list";
@@ -24,7 +24,6 @@ export default function NewHeroSection() {
     return (
         <section className="relative w-full min-h-screen overflow-hidden dark:bg-neutral-950 flex items-center">
             <BackgroundSection enableWaves={['top', 'bottom']} />
-            {/*  KONTEN HERO: Dibungkus container agar tetap rapi di tengah, dan diberi z-10 agar di atas background */}
             <div className="relative z-10 container mx-auto px-6 md:px-10 pt-40 pb-20 max-w-7xl w-full">
                 <div className="flex flex-col gap-7">
                     <motion.div
