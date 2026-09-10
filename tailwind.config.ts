@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindAnimate from "tailwindcss-animate";
 
 const config: Config = {
   // Aktifkan dark mode berbasis class (Standar Shadcn)
@@ -33,7 +34,7 @@ const config: Config = {
   },
   
   // Panggil plugin yang baru saja kita instal
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindAnimate],
 };
 
 export default config;
