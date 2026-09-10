@@ -68,42 +68,44 @@ function CatchphraseDesktop() {
         offset: ["start start", "end end"],
     });
 
-    const textOpacity = useTransform(scrollYProgress, [0, 0.25, 0.35], [1, 1, 0]);
-    const textY = useTransform(scrollYProgress, [0, 0.25, 0.35], ["0%", "0%", "-30%"]);
-    const textScale = useTransform(scrollYProgress, [0, 0.25, 0.35], [1, 1, 1.15]);
-    const textBlur = useTransform(scrollYProgress, [0.25, 0.35], ["blur(0px)", "blur(12px)"]);
-    const bgOpacity = useTransform(scrollYProgress, [0, 0.25, 0.4], [1, 1, 0]);
+    const textOpacity = useTransform(scrollYProgress, [0, 0.2, 0.35], [1, 1, 0]);
+    const textY = useTransform(scrollYProgress, [0, 0.2, 0.35], ["0%", "0%", "-20%"]);
+    const textScale = useTransform(scrollYProgress, [0, 0.2, 0.35], [1, 1, 1.08]);
+    const textBlur = useTransform(scrollYProgress, [0.2, 0.35], ["blur(0px)", "blur(8px)"]);
+    const bgOpacity = useTransform(scrollYProgress, [0, 0.2, 0.4], [1, 1, 0]);
+    
+    // Cards enter smoothly and stay visible until the next section naturally scrolls in
     const cardsOpacity = useTransform(scrollYProgress, [0.35, 0.5], [0, 1]);
-    const cardsY = useTransform(scrollYProgress, [0.35, 0.5], ["15vh", "0vh"]);
-    const cardsScale = useTransform(scrollYProgress, [0.35, 0.5], [0.9, 1]);
+    const cardsY = useTransform(scrollYProgress, [0.35, 0.5], ["6vh", "0vh"]);
+    const cardsScale = useTransform(scrollYProgress, [0.35, 0.5], [0.95, 1]);
 
     return (
-        <section ref={containerRef} className="relative w-full h-[250vh]">
-            <div className="sticky top-0 w-full h-screen overflow-hidden flex flex-col items-center justify-center">
+        <section ref={containerRef} className="relative w-full h-[180vh]">
+            <div className="sticky top-0 w-full h-screen overflow-hidden flex flex-col items-center justify-center pt-16 md:pt-20 pb-6">
                 {/* Radial background mengikuti tema */}
                 <motion.div style={{ opacity: bgOpacity }} className="absolute inset-0 w-full h-full bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops))] from-blue-50 dark:from-blue-900/20 via-white dark:via-neutral-950 to-white dark:to-neutral-950 pointer-events-none transition-colors duration-300" />
                 
                 <motion.div style={{ opacity: textOpacity, y: textY, scale: textScale, filter: textBlur }} className="absolute z-10 flex flex-col items-center text-center px-4 md:px-0 w-full">
-                    <div className="mb-6 px-4 py-1.5 rounded-full border border-neutral-200 dark:border-neutral-800 bg-neutral-100/50 dark:bg-neutral-900/50 backdrop-blur-md text-sm font-medium text-blue-600 dark:text-blue-400 tracking-wide uppercase transition-colors">
+                    <div className="mb-4 md:mb-6 px-4 py-1.5 rounded-full border border-neutral-200 dark:border-neutral-800 bg-neutral-100/50 dark:bg-neutral-900/50 backdrop-blur-md text-xs md:text-sm font-medium text-blue-600 dark:text-blue-400 tracking-wide uppercase transition-colors">
                         Bridging Ideas to Reality
                     </div>
-                    <h1 className="text-6xl md:text-[7rem] font-black leading-[1.1] tracking-tighter mb-6 drop-shadow-[0_0_30px_rgba(56,182,255,0.2)]">
+                    <h1 className="text-5xl md:text-7xl lg:text-[7rem] font-black leading-[1.1] tracking-tighter mb-4 md:mb-6 drop-shadow-[0_0_30px_rgba(56,182,255,0.2)]">
                         <span className="text-neutral-900 dark:text-white transition-colors">CRAFTING</span> <br />
                         <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 via-indigo-500 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-500">DIGITAL MAGIC</span>
                     </h1>
-                    <p className="text-neutral-600 dark:text-neutral-400 text-lg md:text-xl max-w-2xl font-medium leading-relaxed transition-colors">
+                    <p className="text-neutral-600 dark:text-neutral-400 text-base md:text-lg max-w-2xl font-medium leading-relaxed transition-colors">
                         I specialize in developing scalable solutions, seamlessly integrating APIs, and deploying high-performance applications.
                     </p>
                 </motion.div>
-                <motion.div style={{ opacity: cardsOpacity, y: cardsY, scale: cardsScale }} className="absolute z-20 w-full max-w-5xl mx-auto px-6 grid grid-cols-2 gap-8 pointer-events-none">
+                <motion.div style={{ opacity: cardsOpacity, y: cardsY, scale: cardsScale }} className="absolute z-20 w-full max-w-4xl xl:max-w-5xl mx-auto px-6 grid grid-cols-2 gap-4 md:gap-5 lg:gap-6 pointer-events-none">
                     {HIGHLIGHT_CARDS.map((card, idx) => (
-                        <Card key={idx} className={`relative overflow-hidden bg-white/80 dark:bg-neutral-900/80 border-neutral-200 dark:border-neutral-800 shadow-2xl h-80 flex flex-col justify-end pointer-events-none p-0 transition-colors ${idx % 2 === 0 ? "md:-translate-y-8" : "md:translate-y-8"}`}>
+                        <Card key={idx} className={`relative overflow-hidden bg-white/80 dark:bg-neutral-900/80 border-neutral-200 dark:border-neutral-800 shadow-xl h-[190px] sm:h-[210px] md:h-[220px] lg:h-[240px] xl:h-[260px] flex flex-col justify-end pointer-events-none p-0 transition-all duration-300 ${idx % 2 === 0 ? "md:-translate-y-2" : "md:translate-y-2"}`}>
                             <CardMedia video={card.video} poster={card.poster} title={card.title} />
                             <div className="absolute inset-0 bg-linear-to-t from-white via-white/80 dark:from-[#0a0a0a] dark:via-black/60 to-transparent z-5" />
                             
-                            <CardHeader className="relative z-10 pb-6 pt-0">
-                                <CardTitle className="text-3xl font-bold text-neutral-900 dark:text-white tracking-wide transition-colors">{card.title}</CardTitle>
-                                <CardDescription className="text-base text-neutral-600 dark:text-neutral-400 font-medium mt-1 transition-colors">{card.desc}</CardDescription>
+                            <CardHeader className="relative z-10 pb-4 pt-0 px-4 md:px-5">
+                                <CardTitle className="text-xl md:text-2xl font-bold text-neutral-900 dark:text-white tracking-wide transition-colors">{card.title}</CardTitle>
+                                <CardDescription className="text-xs md:text-sm text-neutral-600 dark:text-neutral-400 font-medium mt-0.5 transition-colors">{card.desc}</CardDescription>
                             </CardHeader>
                         </Card>
                     ))}
