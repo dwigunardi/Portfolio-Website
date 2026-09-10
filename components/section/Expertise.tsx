@@ -5,9 +5,10 @@ import AnimatedContent from "@/components/AnimatedContent";
 import InfiniteCard, { TechItem } from "@/components/infiniteCard";
 import ShinyText from "@/components/ShinyText";
 import SplitText from "@/components/SplitText";
-import { Card, CardContent, } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 
@@ -17,11 +18,11 @@ export const techStacks: TechItem[] = [
     { id: "js", name: "JavaScript", icon: <IconBrandJavascript className="text-yellow-400" /> },
     { id: "ts", name: "TypeScript", icon: <IconBrandTypescript className="text-blue-500" /> },
     { id: "react", name: "React.js", icon: <IconBrandReact className="text-cyan-400" /> },
-    { id: "next", name: "Next.js", icon: <IconBrandNextjs className="text-white" /> },
+    { id: "next", name: "Next.js", icon: <IconBrandNextjs className="text-neutral-900 dark:text-white" /> },
     { id: "vue", name: "Vue.js", icon: <IconBrandVue className="text-green-500" /> },
     { id: "nuxt", name: "Nuxt.js", icon: <IconBrandNuxt className="text-green-500" /> },
     { id: "node", name: "Node.js", icon: <IconBrandNodejs className="text-green-600" /> },
-    { id: "github", name: "GitHub", icon: <IconBrandGithub className="text-gray-300" /> },
+    { id: "github", name: "GitHub", icon: <IconBrandGithub className="text-neutral-900 dark:text-gray-300" /> },
     { id: "docker", name: "Docker", icon: <IconBrandDocker className="text-blue-600" /> },
     { id: "cypress", name: "Cypress", icon: <IconBrandCypress className="text-purple-500" /> },
     { id: "mysql", name: "MySQL", icon: <IconBrandMysql className="text-blue-300" /> },
@@ -55,6 +56,11 @@ export default function Expertise() {
 
     const [activeItem, setActiveItem] = useState<string>(cardItems[0].value);
     const activeData = cardItems.find((item) => item.value === activeItem) || cardItems[0];
+    const { resolvedTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => setMounted(true), []);
+    const isDark = !mounted || resolvedTheme === "dark";
+
     return (
         <section id="expertise" className="relative w-full text-justify mx-auto flex flex-col gap-10 max-w-7xl text-neutral-800 dark:text-white">
             <div className="container w-full mx-auto py-20 flex flex-col items-start justify-start gap-10 text-start">
@@ -75,14 +81,14 @@ export default function Expertise() {
                             text="✨ Specialties"
                             speed={2}
                             delay={2}
-                            color="#38b6ff"
-                            shineColor="#ffffff"
+                            color={isDark ? "#38b6ff" : "#0284c7"}
+                            shineColor={isDark ? "#ffffff" : "#2563eb"}
                             spread={120}
                             direction="left"
                             yoyo={false}
                             pauseOnHover={false}
                             disabled={false}
-                            className="text-2xl"
+                            className="text-2xl font-semibold"
                         />
                     </AnimatedContent>
                     <SplitText
@@ -112,7 +118,7 @@ export default function Expertise() {
                     delay={0}
                 >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                        <Card className="min-w-full backdrop-blur-sm border-neutral-700 text-neutral-800 dark:text-white">
+                        <Card className="min-w-full bg-white/80 dark:bg-neutral-900/40 backdrop-blur-sm border border-neutral-200 dark:border-neutral-800 shadow-xs text-neutral-800 dark:text-white">
                             <CardContent>
                                 <Accordion
                                     type="single"
@@ -130,7 +136,7 @@ export default function Expertise() {
                                 </Accordion>
                             </CardContent>
                         </Card>
-                        <div className="relative w-full h-75 md:h-full min-h-100 rounded-xl overflow-hidden bg-neutral-900 border border-neutral-800 shadow-xl group">
+                        <div className="relative w-full h-75 md:h-full min-h-100 rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xs dark:shadow-xl group">
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={activeItem}
@@ -138,25 +144,25 @@ export default function Expertise() {
                                     animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
                                     exit={{ opacity: 0, scale: 1.05, filter: "blur(4px)" }}
                                     transition={{ duration: 0.4, ease: "easeInOut" }}
-                                    whileHover={{ scale: 1.1 }}
+                                    whileHover={{ scale: 1.05 }}
                                     className="absolute inset-0 w-full h-full"
                                 >
                                     <Image
                                         src={activeData.image}
                                         alt={activeData.value}
                                         fill
-                                        className="object-cover object-right rounded-2xl"
+                                        className="object-cover object-right rounded-xl"
                                         sizes="(max-width: 768px) 100vw, 50vw"
                                         priority
                                     />
-                                    {/* 1. LAYER VIGNETTE: Radial gradient gelap di pinggiran, transparan di tengah */}
-                                    <div className="absolute inset-0 rounded-2xl pointer-events-none bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.8)_100%)]" />
+                                    {/* 1. LAYER VIGNETTE: Hanya di dark mode agar gambar di light mode tidak gelap gulita */}
+                                    <div className="hidden dark:block absolute inset-0 rounded-xl pointer-events-none bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.8)_100%)]" />
 
-                                    {/* 2. LAYER GRADIENT BAWAH (Opsional, dari kode Anda sebelumnya) */}
-                                    <div className="absolute inset-0 rounded-2xl pointer-events-none bg-linear-to-t from-[#111116]/90 via-transparent to-transparent" />
+                                    {/* 2. LAYER GRADIENT BAWAH: Hanya di dark mode */}
+                                    <div className="hidden dark:block absolute inset-0 rounded-xl pointer-events-none bg-linear-to-t from-[#111116]/90 via-transparent to-transparent" />
 
-                                    {/* 3. EFEK HOVER (Bonus): Gambar sedikit membesar saat mouse diarahkan ke area gambar */}
-                                    <div className="absolute inset-0 rounded-2xl pointer-events-none ring-1 ring-inset ring-white/10 group-hover:bg-black/10 transition-colors duration-500" />
+                                    {/* 3. EFEK HOVER & BORDER: Halus dan adaptif untuk light dan dark mode */}
+                                    <div className="absolute inset-0 rounded-xl pointer-events-none ring-1 ring-inset ring-black/5 dark:ring-white/10 group-hover:bg-black/5 dark:group-hover:bg-white/5 transition-colors duration-500" />
                                 </motion.div>
                             </AnimatePresence>
                         </div>

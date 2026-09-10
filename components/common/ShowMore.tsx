@@ -62,7 +62,7 @@ export default function ShowMore({
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.2 }}
-                            className="absolute bottom-0 left-0 right-0 h-16 bg-linear-to-t from-black to-transparent pointer-events-none"
+                            className="absolute bottom-0 left-0 right-0 h-20 bg-linear-to-t from-white via-white/80 dark:from-neutral-950 dark:via-neutral-950/80 to-transparent pointer-events-none"
                         />
                     )}
                 </AnimatePresence>
