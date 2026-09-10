@@ -24,6 +24,7 @@ function CardMedia({ video, poster, title }: { video: string; poster: string; ti
                 alt={title}
                 fill
                 priority
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className={cn(
                     "object-cover dark:mix-blend-screen transition-opacity duration-700",
                     isVideoLoaded ? "opacity-0 pointer-events-none" : "opacity-90 dark:opacity-30"

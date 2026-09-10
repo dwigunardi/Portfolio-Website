@@ -14,56 +14,40 @@ export default function ScrollRevealText({ text, className }: ScrollRevealTextPr
     // Memantau posisi scroll pada wadah teks ini
     const { scrollYProgress } = useScroll({
         target: containerRef,
-        // "start 80%" = Animasi mulai saat ujung atas elemen menyentuh 80% layar dari atas
-        // "end 50%" = Animasi selesai saat ujung bawah elemen berada di tengah layar
-        offset: ["start 80%", "end 50%"],
+        // "start 85%" = Animasi mulai saat ujung atas elemen menyentuh 85% layar dari atas
+        // "end 45%" = Animasi selesai saat ujung bawah elemen berada di tengah layar
+        offset: ["start 85%", "end 45%"],
     });
 
-    // Pecah teks menjadi kata-kata agar word-wrap (turun baris) tetap rapi
+    // Pecah teks menjadi kata-kata (mengurangi dari ~412 node huruf menjadi ~50 node kata)
     const words = text.split(" ");
-
-    // Hitung total huruf (tanpa spasi) untuk membagi porsi animasi secara adil
-    const totalLetters = text.replace(/\s/g, "").length;
-
-    // Variabel untuk melacak urutan huruf ke-berapa yang sedang dirender
-    let currentLetterIndex = 0;
+    const totalWords = words.length;
 
     return (
         <div
             ref={containerRef}
-            className={cn("flex flex-wrap gap-x-2 gap-y-1", className)}
+            className={cn("flex flex-wrap gap-x-2 gap-y-1.5", className)}
         >
             {words.map((word, wordIndex) => {
-                const letters = word.split("");
+                const start = wordIndex / totalWords;
+                const end = Math.min(start + 1.5 / totalWords, 1);
 
                 return (
-                    // flex digunakan di sini agar huruf dalam 1 kata tidak terpisah ke baris bawah
-                    <span key={wordIndex} className="flex">
-                        {letters.map((letter, letterIdx) => {
-                            // Menghitung kapan huruf ini mulai dan selesai menyala
-                            const start = currentLetterIndex / totalLetters;
-                            const end = start + 1 / totalLetters;
-                            currentLetterIndex++;
-
-                            return (
-                                <Letter
-                                    key={letterIdx}
-                                    progress={scrollYProgress}
-                                    range={[start, end]}
-                                >
-                                    {letter}
-                                </Letter>
-                            );
-                        })}
-                    </span>
+                    <Word
+                        key={wordIndex}
+                        progress={scrollYProgress}
+                        range={[start, end]}
+                    >
+                        {word}
+                    </Word>
                 );
             })}
         </div>
     );
 }
 
-// Sub-komponen untuk merender masing-masing huruf
-const Letter = ({
+// Sub-komponen untuk merender masing-masing kata dengan GPU compositor layer
+const Word = ({
     children,
     progress,
     range,
@@ -72,20 +56,20 @@ const Letter = ({
     progress: MotionValue<number>;
     range: [number, number];
 }) => {
-    // opacity akan bergerak dari 0 ke 1 berdasarkan range scroll masing-masing huruf
+    // opacity akan bergerak dari 0 ke 1 berdasarkan range scroll masing-masing kata
     const opacity = useTransform(progress, range, [0, 1]);
 
     return (
         <span className="relative inline-block">
-            {/* 1. Lapisan Dasar (Warna "Hitam" / Gelap) */}
-            <span className="absolute text-neutral-100 dark:text-neutral-800">
+            {/* 1. Lapisan Dasar (Warna Redup / Latar Belakang) */}
+            <span className="text-neutral-300 dark:text-neutral-800 select-none">
                 {children}
             </span>
 
-            {/* 2. Lapisan Sorotan (Warna Putih yang perlahan muncul) */}
+            {/* 2. Lapisan Sorotan (Warna Terang yang perlahan menyala) */}
             <motion.span
                 style={{ opacity }}
-                className="relative z-10 text-neutral-900 dark:text-white"
+                className="absolute inset-0 z-10 text-neutral-900 dark:text-white will-change-[opacity]"
             >
                 {children}
             </motion.span>

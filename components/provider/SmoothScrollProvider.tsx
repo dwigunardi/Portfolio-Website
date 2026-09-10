@@ -1,26 +1,38 @@
 "use client";
 import { ReactLenis } from 'lenis/react';
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, useEffect, useRef } from "react";
 import type { LenisRef } from 'lenis/react';
 import { cancelFrame, frame } from 'motion/react';
-import { useEffect, useRef } from 'react';
+
+const lenisOptions = {
+    autoRaf: false,
+    duration: 1.0,
+    lerp: 0.09,
+    smoothWheel: true,
+    wheelMultiplier: 1.0,
+    touchMultiplier: 1.5,
+};
 
 export default function SmoothScrollProvider({ children }: PropsWithChildren) {
-    const lenisRef = useRef<LenisRef>(null)
+    const lenisRef = useRef<LenisRef>(null);
 
     useEffect(() => {
         function update(data: { timestamp: number }) {
-            const time = data.timestamp
-            lenisRef.current?.lenis?.raf(time)
+            const time = data.timestamp;
+            lenisRef.current?.lenis?.raf(time);
         }
 
-        frame.update(update, true)
+        frame.update(update, true);
 
-        return () => cancelFrame(update)
-    }, [])
+        return () => cancelFrame(update);
+    }, []);
 
     return (
-        <ReactLenis ref={lenisRef} root options={{ autoRaf: false, lerp: 0.1, duration: 1.5, smoothWheel: true }}>
+        <ReactLenis
+            ref={lenisRef}
+            root
+            options={lenisOptions}
+        >
             {children}
         </ReactLenis>
     );

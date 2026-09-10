@@ -444,7 +444,11 @@ export default function FloatingLines({
     }
 
     let raf = 0;
+    let isVisible = true;
+
     const renderLoop = () => {
+      if (!isVisible) return;
+
       uniforms.iTime.value = clock.getElapsedTime();
 
       if (interactive) {
@@ -463,10 +467,35 @@ export default function FloatingLines({
       renderer.render(scene, camera);
       raf = requestAnimationFrame(renderLoop);
     };
+
+    // Auto-pause WebGL loop when canvas is scrolled out of viewport
+    const io = typeof IntersectionObserver !== 'undefined'
+      ? new IntersectionObserver(
+          ([entry]) => {
+            const nowVisible = entry.isIntersecting;
+            if (nowVisible && !isVisible) {
+              isVisible = true;
+              raf = requestAnimationFrame(renderLoop);
+            } else if (!nowVisible && isVisible) {
+              isVisible = false;
+              cancelAnimationFrame(raf);
+            }
+          },
+          { threshold: 0.05 }
+        )
+      : null;
+
+    if (io && containerRef.current) {
+      io.observe(containerRef.current);
+    }
+
     renderLoop();
 
     return () => {
       cancelAnimationFrame(raf);
+      if (io) {
+        io.disconnect();
+      }
       if (ro) {
         ro.disconnect();
       }

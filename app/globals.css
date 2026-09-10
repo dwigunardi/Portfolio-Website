@@ -303,3 +303,18 @@ html.lenis {
   padding: 20px;
   /* Add styling for your items */
 }
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee-scroll {
+  animation: marquee-scroll var(--marquee-speed, 25s) linear infinite;
+  will-change: transform;
+}
+

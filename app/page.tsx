@@ -37,7 +37,7 @@ export default function Home() {
   };
 
   return (
-    <div className="" id="home">
+    <div className="relative min-h-screen" id="home">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

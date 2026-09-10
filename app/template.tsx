@@ -28,12 +28,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
             isTriggered = true;
             setIsDoorsOpening(true);
 
-            // After doors slide open (duration: 1s), remove overlay completely
+            // After doors slide open (duration: 1.2s), remove overlay completely
             setTimeout(() => {
                 document.body.style.overflow = "";
                 introState.hasPlayed = true;
                 setShowDoor(false);
-            }, 1000);
+            }, 1200);
         };
 
         const checkReadiness = () => {
@@ -42,16 +42,16 @@ export default function Template({ children }: { children: React.ReactNode }) {
             }
         };
 
-        // 1. Min branding animation timer (1.5s)
+        // 1. Min branding animation timer (2.2s) agar terasa megah & cinematic
         const minTimer = setTimeout(() => {
             isMinTimeElapsed = true;
             checkReadiness();
-        }, 1500);
+        }, 2200);
 
-        // 2. Safety max timeout (3.5s) to ensure visitor is never blocked
+        // 2. Safety max timeout (4.0s) to ensure visitor is never blocked
         const maxSafetyTimer = setTimeout(() => {
             triggerDoorOpen();
-        }, 3500);
+        }, 4000);
 
         // 3. Window load listener
         const handleLoad = () => {
@@ -80,13 +80,13 @@ export default function Template({ children }: { children: React.ReactNode }) {
                     <motion.div 
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{
-                            opacity: isDoorsOpening ? 0 : [0, 1, 1],
-                            scale: isDoorsOpening ? 1.2 : [0.8, 1, 1]
+                            opacity: isDoorsOpening ? 0 : 1,
+                            scale: isDoorsOpening ? 1.25 : 1
                         }}
-                        transition={{ duration: 1.2, ease: "easeInOut" }}
+                        transition={{ duration: isDoorsOpening ? 0.7 : 1.2, ease: "easeInOut" }}
                         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-110 flex items-center justify-center"
                     >
-                        <span className="text-4xl md:text-6xl font-black text-white tracking-widest drop-shadow-[0_0_15px_rgba(56,182,255,0.5)]">
+                        <span className="text-4xl md:text-6xl font-black text-white tracking-widest drop-shadow-[0_0_25px_rgba(56,182,255,0.6)]">
                             DGM<span className="text-blue-500">.</span>
                         </span>
                     </motion.div>
@@ -95,7 +95,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
                     <motion.div
                         initial={{ x: "0%" }}
                         animate={{ x: isDoorsOpening ? "-100%" : "0%" }}
-                        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                        transition={{ duration: 1.2, ease: [0.65, 0, 0.35, 1] }}
                         className={cn("w-1/2 h-full bg-neutral-950 border-r border-neutral-800 shadow-[20px_0_50px_rgba(0,0,0,0.5)] relative z-105")}
                     />
 
@@ -103,7 +103,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
                     <motion.div
                         initial={{ x: "0%" }}
                         animate={{ x: isDoorsOpening ? "100%" : "0%" }}
-                        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                        transition={{ duration: 1.2, ease: [0.65, 0, 0.35, 1] }}
                         className={cn("w-1/2 h-full bg-neutral-950 border-l border-neutral-800 shadow-[-20px_0_50px_rgba(0,0,0,0.5)] relative z-105")}
                     />
                 </div>
