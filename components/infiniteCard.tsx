@@ -64,12 +64,12 @@ export default function InfiniteCard({
                 {[...items, ...items, ...items, ...items].map((item, i) => (
                     <div
                         key={`${item.id}-${i}`}
-                        className="flex shrink-0 items-center justify-center gap-2 rounded-full border border-neutral-800 bg-neutral-800 dark:bg-neutral-900/50 px-5 py-2.5 shadow-sm backdrop-blur-sm transition-colors hover:bg-neutral-800 cursor-default"
+                        className="flex shrink-0 items-center justify-center gap-2 rounded-full border border-neutral-200 dark:border-neutral-800 bg-white/90 dark:bg-neutral-900/50 px-5 py-2.5 shadow-xs dark:shadow-sm backdrop-blur-sm transition-colors hover:border-blue-500/50 cursor-default"
                     >
                         <span className="flex items-center justify-center text-xl">
                             {item.icon}
                         </span>
-                        <span className="text-sm font-medium text-neutral-200">
+                        <span className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
                             {item.name}
                         </span>
                     </div>

@@ -70,8 +70,8 @@ export const NavBody = ({ children, className, isShrunk }: NavBodyProps) => {
       // Ini adalah kunci perbaikannya:
       // Kita atur width dengan nilai absolut/persen yang jelas
       animate={{
-        backdropFilter: isShrunk ? "blur(3px)" : "blur(0px)",
-        boxShadow: isShrunk ? "0 4px 30px rgba(0, 0, 0, 0.1)" : "none",
+        backdropFilter: isShrunk ? "blur(12px)" : "blur(0px)",
+        boxShadow: isShrunk ? "0 4px 30px rgba(0, 0, 0, 0.08)" : "none",
         width: isShrunk ? "62%" : "80%", // 100% dikurangi padding 2rem agar tidak nabrak ujung layar
         y: 0,
       }}
@@ -82,9 +82,9 @@ export const NavBody = ({ children, className, isShrunk }: NavBodyProps) => {
       }}
       className={cn(
         // HAPUS w-full dari sini! Biarkan motion yang mengatur lebarnya
-        "relative z-60 mx-auto hidden  flex-row items-center justify-between self-start rounded-full px-4 py-2 lg:flex border transition-colors duration-300",
+        "relative z-60 mx-auto hidden flex-row items-center justify-between self-start rounded-full px-4 py-2 lg:flex border transition-colors duration-300",
         isShrunk
-          ? "border-white/10"
+          ? "bg-white/70 dark:bg-neutral-950/70 border-neutral-200/70 dark:border-neutral-800/70 shadow-xs backdrop-blur-md"
           : "bg-transparent border-transparent",
         className
       )}
@@ -110,14 +110,14 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
         <Link
           onMouseEnter={() => setHovered(idx)}
           onClick={(e) => onItemClick && onItemClick(e, item)}
-          className="relative px-4 py-2 dark:text-white text-neutral-500 hover:text-white cursor-pointer"
+          className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white cursor-pointer transition-colors duration-200"
           key={`link-${idx}`}
           href={item.link}
         >
           {hovered === idx && (
             <motion.div
               layoutId="hovered-default"
-              className="absolute inset-0 h-full w-full rounded-full bg-blue-500 dark:bg-neutral-800"
+              className="absolute inset-0 h-full w-full rounded-full bg-neutral-100/90 dark:bg-neutral-800"
             />
           )}
           <span className="relative z-20">{item.name}</span>
@@ -148,7 +148,7 @@ export const MobileNav = ({ children, className, isShrunk }: MobileNavProps) => 
         // HAPUS w-full dan atur margin otomatis
         "relative z-50 mx-auto flex flex-col items-center justify-between px-0 py-2 lg:hidden border transition-colors duration-300",
         isShrunk
-          ? "bg-white/10 dark:bg-neutral-900/40 border-black/10 dark:border-white/10"
+          ? "bg-white/70 dark:bg-neutral-950/70 border-neutral-200/70 dark:border-neutral-800/70 shadow-xs backdrop-blur-md"
           : "bg-transparent border-transparent",
         className
       )}

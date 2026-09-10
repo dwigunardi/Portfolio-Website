@@ -5,13 +5,13 @@ export default function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="w-full border-t bg-white border-neutral-800/50 dark:bg-neutral-950 px-6 py-8 relative z-20">
+        <footer className="w-full border-t border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-50/50 dark:bg-neutral-950 px-6 py-8 relative z-20">
             <div className="mx-auto max-w-7xl flex flex-col md:flex-row items-center justify-between gap-6">
                 <div className="flex flex-col items-center md:items-start gap-1">
-                    <p className="dark:text-neutral-400 text-sm font-medium">
+                    <p className="text-neutral-600 dark:text-neutral-400 text-sm font-medium">
                         © {currentYear} Dwi Gunardi M. All rights reserved.
                     </p>
-                    <p className="dark:text-neutral-600 text-xs">
+                    <p className="text-neutral-400 dark:text-neutral-600 text-xs">
                         Crafted with Next.js, Tailwind CSS & Framer Motion.
                     </p>
                 </div>

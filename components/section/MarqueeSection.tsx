@@ -6,7 +6,7 @@ import InfiniteMarquee from "@/components/InfiniteTextMarquee";
 
 export default function MarqueeSection() {
     return (
-        <section className="border-y border-neutral-200/20 dark:border-neutral-800/80 z-10 w-full">
+        <section className="border-y border-neutral-200/80 dark:border-neutral-800/80 z-10 w-full">
            <AnimatedContent distance={10} direction="vertical" reverse={false} duration={0.8} ease="power3.out" initialOpacity={0} animateOpacity scale={1} threshold={0.1} delay={0} key="marquee-section">
                 <InfiniteMarquee words={MARQUEE_WORDS} speed={60} />
             </AnimatedContent>

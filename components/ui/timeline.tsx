@@ -101,7 +101,7 @@ export const Timeline = ({
           style={{
             height: height + "px",
           } as React.CSSProperties}
-          className="absolute md:left-8 left-8 top-0 overflow-hidden w-0.5 bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-0% via-neutral-200 dark:via-neutral-700 to-transparent to-99%  mask-[linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] z-0"
+          className="absolute md:left-8 left-8 top-0 overflow-hidden w-0.5 bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-0% via-neutral-300 dark:via-neutral-700 to-transparent to-99%  mask-[linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] z-0"
         >
           <motion.div
             style={{
@@ -127,8 +127,8 @@ export const Timeline = ({
             >
               <div className="flex justify-start pt-10 gap-10">
                 <div className="sticky flex flex-col md:flex-row items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
-                  <div className="h-10 absolute top-1.5 left-3 md:left-3 w-10 rounded-full bg-white dark:bg-black flex items-center justify-center z-40 border border-neutral-200 dark:border-transparent">
-                    <div className="h-4 w-4 rounded-full bg-neutral-200 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 p-2" />
+                  <div className="h-10 absolute top-1.5 left-3 md:left-3 w-10 rounded-full bg-white dark:bg-black flex items-center justify-center z-40 border border-neutral-300 dark:border-neutral-800 shadow-xs">
+                    <div className="h-4 w-4 rounded-full bg-neutral-300 dark:bg-neutral-800 border border-neutral-400 dark:border-neutral-700 p-2" />
                   </div>
                   <div className="flex flex-col items-end justify-end gap-4 self-start max-w-xs lg:max-w-sm md:w-full">
                     {/* PERBAIKAN: Warna title */}

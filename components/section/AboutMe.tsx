@@ -4,7 +4,15 @@ import AnimatedContent from "@/components/AnimatedContent";
 import ShinyText from "@/components/ShinyText";
 import ScrollRevealText from "@/components/ScrollRevealText";
 
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+
 export default function AboutMe() {
+    const { resolvedTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => setMounted(true), []);
+    const isDark = !mounted || resolvedTheme === "dark";
+
     return (
         <section id="about-me" className="text-center mx-auto flex flex-col gap-10">
             <AnimatedContent
@@ -24,14 +32,14 @@ export default function AboutMe() {
                     text="✨ About Me"
                     speed={2}
                     delay={2}
-                    color="#38b6ff"
-                    shineColor="#ffffff"
+                    color={isDark ? "#38b6ff" : "#0284c7"}
+                    shineColor={isDark ? "#ffffff" : "#2563eb"}
                     spread={120}
                     direction="left"
                     yoyo={false}
                     pauseOnHover={false}
                     disabled={false}
-                    className="text-2xl"
+                    className="text-2xl font-semibold"
 
                 />
             </AnimatedContent>

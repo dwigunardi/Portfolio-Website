@@ -62,7 +62,7 @@ const Word = ({
     return (
         <span className="relative inline-block">
             {/* 1. Lapisan Dasar (Warna Redup / Latar Belakang) */}
-            <span className="text-neutral-300 dark:text-neutral-800 select-none">
+            <span className="text-neutral-400/80 dark:text-neutral-800 select-none">
                 {children}
             </span>
 

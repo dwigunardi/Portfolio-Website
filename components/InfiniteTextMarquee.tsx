@@ -12,7 +12,7 @@ export default function InfiniteMarquee({
     className,
 }: InfiniteMarqueeProps) {
     return (
-        <div className={cn("relative flex w-full overflow-hidden bg-neutral-950/60 backdrop-blur-sm py-3 md:py-3.5", className)}>
+        <div className={cn("relative flex w-full overflow-hidden bg-white/70 dark:bg-neutral-950/60 backdrop-blur-md py-3 md:py-3.5", className)}>
             <div
                 className="flex whitespace-nowrap animate-marquee-scroll"
                 style={{ "--marquee-speed": `${speed}s` } as React.CSSProperties}
@@ -25,12 +25,12 @@ export default function InfiniteMarquee({
                                 key={idx}
                                 className="flex items-center gap-8 px-4"
                             >
-                                {/* Styling teks besar, tebal, dan agak transparan menyesuaikan tema gelap */}
-                                <span className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-wider text-transparent [-webkit-text-stroke:2px_#3f3f46] hover:[-webkit-text-stroke:2px_#ffffff] transition-all duration-300 cursor-default">
+                                {/* Styling teks besar, tebal, dan adaptif untuk light dan dark mode */}
+                                <span className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-wider text-transparent [-webkit-text-stroke:1.5px_#a1a1aa] hover:[-webkit-text-stroke:1.5px_#18181b] dark:[-webkit-text-stroke:2px_#3f3f46] dark:hover:[-webkit-text-stroke:2px_#ffffff] transition-all duration-300 cursor-default">
                                     {word}
                                 </span>
                                 {/* Simbol Pemisah */}
-                                <span className="text-3xl md:text-4xl text-neutral-700">✦</span>
+                                <span className="text-3xl md:text-4xl text-neutral-300 dark:text-neutral-700">✦</span>
                             </div>
                         ))}
                     </div>
