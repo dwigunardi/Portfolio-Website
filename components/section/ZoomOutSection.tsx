@@ -1,11 +1,10 @@
 'use client';
 
 import { useRef } from "react";
-import { useScroll, useTransform, motion } from "motion/react"; // Sesuaikan dengan import Anda
+import { useScroll, useTransform, motion } from "motion/react";
 import Image from "next/image";
 import AnimatedContent from "@/components/AnimatedContent";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import CircuitBeams from "@/components/ui/CircuitBeams";
 
 export default function ZoomOutSection() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -16,13 +15,13 @@ export default function ZoomOutSection() {
     });
     const scale = useTransform(scrollYProgress, [0, 1], [1.5, 1]);
 
-    // RUMUS PARALLAX: Agar gambar juga sedikit bergerak ke bawah saat di-scroll
+    // Parallax effect for the background image
     const parallaxEffect = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
     return (
         <section
             ref={containerRef}
-            className="relative w-full h-[90vh] min-h-150 overflow-hidden flex items-center justify-center"
+            className="relative w-full overflow-hidden bg-white dark:bg-neutral-950 transition-colors pt-28 sm:pt-32 md:pt-36 pb-10 md:pb-12 flex flex-col items-center justify-center"
         >
             <motion.div
                 style={{ scale, y: parallaxEffect }}
@@ -35,27 +34,33 @@ export default function ZoomOutSection() {
                     className="object-cover opacity-20 dark:opacity-30"
                 />
             </motion.div>
-            
-            <div className="absolute inset-0 bg-linear-to-t from-white via-white/85 to-white dark:from-neutral-950 dark:via-neutral-950/40 dark:to-neutral-950" />
-            <div className="relative z-10 container mx-auto px-4 flex flex-col items-center text-center gap-8">
+
+            {/* 1. Base Gradient Overlay */}
+            <div className="absolute inset-0 bg-linear-to-t from-white via-white/80 to-white dark:from-neutral-950 dark:via-neutral-950/40 dark:to-neutral-950" />
+
+            {/* 2. Grid Blueprint Halus (Hanya di Light Mode agar estetik dan tidak kosong) */}
+            <div className="dark:hidden absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.04)_1px,transparent_1px)] bg-size[48px_48px] mask-[radial-gradient(ellipse_70%_70%_at_50%_50%,#000_30%,transparent_100%)] pointer-events-none" />
+
+            {/* 3. Central Content: Compact & beautifully proportioned across mobile, tablet, and desktop */}
+            <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 flex flex-col items-center text-center">
                 <AnimatedContent
-                    distance={100}
+                    distance={80}
                     direction="vertical"
-                    duration={1}
+                    duration={0.9}
                     ease="power3.out"
-                    threshold={0.2}
+                    threshold={0.15}
                 >
-                    <h2 className="text-4xl md:text-6xl font-extrabold text-neutral-900 dark:text-white tracking-tight mb-4">
+                    <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-neutral-900 dark:text-white tracking-tight mb-3">
                         Ready to build <span className="text-blue-600 dark:text-blue-400">something amazing?</span>
                     </h2>
-                    <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto mb-8 leading-relaxed">
+                    <p className="text-xs sm:text-base md:text-lg text-neutral-600 dark:text-neutral-400 max-w-xl mx-auto mb-2 leading-relaxed font-normal px-2 sm:px-0">
                         Whether you need a modern web application, an internal dashboard, or a seamless user experience, let's collaborate and turn your vision into reality.
                     </p>
-                    <Button className="px-8 py-6 bg-neutral-900 text-white dark:bg-white dark:text-black font-bold rounded-full hover:bg-neutral-800 dark:hover:bg-neutral-200 hover:scale-105 transition-all duration-300 shadow-xl dark:shadow-[0_0_40px_rgba(255,255,255,0.2)]">
-                        <Link href='/contact'>
-                            Let's Talk About Your Project
-                        </Link>
-                    </Button>
+
+                    {/* Self-Contained Microchip CTA (Traces, Pins & Button in one responsive canvas) */}
+                    <div className="w-full max-w-xl sm:max-w-2xl mx-auto flex justify-center">
+                        <CircuitBeams className="w-full" />
+                    </div>
                 </AnimatedContent>
             </div>
         </section>
