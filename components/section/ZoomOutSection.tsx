@@ -21,17 +21,17 @@ export default function ZoomOutSection() {
     return (
         <section
             ref={containerRef}
-            className="relative w-full overflow-hidden bg-white dark:bg-neutral-950 transition-colors pt-28 sm:pt-32 md:pt-36 pb-10 md:pb-12 flex flex-col items-center justify-center"
+            className="relative w-full overflow-hidden bg-white dark:bg-neutral-950 transition-colors min-h-[75vh] pt-24 sm:pt-32 md:pt-36 pb-10 md:pb-12 flex flex-col items-center justify-center"
         >
             <motion.div
                 style={{ scale, y: parallaxEffect }}
-                className="absolute inset-0 w-full h-full will-change-transform"
+                className="hidden dark:block absolute inset-0 w-full h-full will-change-transform"
             >
                 <Image
                     src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop"
                     alt="Background Workspace"
                     fill
-                    className="object-cover opacity-20 dark:opacity-30"
+                    className="object-cover opacity-30"
                 />
             </motion.div>
 
@@ -50,10 +50,10 @@ export default function ZoomOutSection() {
                     ease="power3.out"
                     threshold={0.15}
                 >
-                    <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-neutral-900 dark:text-white tracking-tight mb-3">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-neutral-900 dark:text-white tracking-tight mb-3 sm:mb-4 leading-tight">
                         Ready to build <span className="text-blue-600 dark:text-blue-400">something amazing?</span>
                     </h2>
-                    <p className="text-xs sm:text-base md:text-lg text-neutral-600 dark:text-neutral-400 max-w-xl mx-auto mb-2 leading-relaxed font-normal px-2 sm:px-0">
+                    <p className="text-sm sm:text-base md:text-lg text-neutral-600 dark:text-neutral-400 max-w-xl mx-auto mb-4 sm:mb-2 leading-relaxed font-normal px-2 sm:px-0">
                         Whether you need a modern web application, an internal dashboard, or a seamless user experience, let's collaborate and turn your vision into reality.
                     </p>
 
