@@ -64,9 +64,9 @@ export default function AboutPage() {
             <BackgroundSection enableWaves={['middle', 'bottom']} />
             <HeroBanner />
 
-            <main className="container mx-auto relative z-99 pb-20" id="about-me">
-                <div className="flex flex-col gap-20 mt-28 px-4 md:px-0">
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-20" id="about-me">
+                <div className="flex flex-col gap-16 md:gap-20 mt-16 md:mt-24">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-start">
                         <AnimatedContent
                             distance={40}
                             direction="vertical"

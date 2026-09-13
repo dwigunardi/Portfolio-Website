@@ -15,7 +15,7 @@ import { techStacks } from "@/components/section/Expertise";
 export default function HeroBanner() {
 
     const handleDownloadResume = () => {
-        if(typeof document !== "undefined") {
+        if (typeof document !== "undefined") {
             const link = document.createElement('a');
             link.href = '/assets/CV/CV-Dwi-Gunardi-Meinaki.pdf';
             link.download = 'Dwi_Gunardi_M_Resume.pdf';
@@ -28,36 +28,33 @@ export default function HeroBanner() {
     return (
         <section className="w-full min-h-screen" id="hero-section">
             <div className="container mx-auto h-full relative">
-                <div className="grid grid-cols-12">
-                    <div className="col-span-12 md:col-span-6 order-2 md:order-1">
-                        <div className="relative hidden md:block">
-                            <div className="absolute top-40 -right-40 w-full h-full z-50">
-                                <AnimatedContent
-                                    distance={100}
-                                    direction="vertical"
-                                    reverse={false}
-                                    duration={0.8}
-                                    ease="power3.out"
-                                    initialOpacity={0}
-                                    animateOpacity
-                                    scale={1}
-                                    threshold={0.1}
-                                    delay={0}
-                                >
-                                    <CircularText
-                                        text="FRONT*END*DEVELOPER*"
-                                        onHover="speedUp"
-                                        spinDuration={20}
-                                        className="custom-class cursor-default!"
-                                    />
-
-                                </AnimatedContent>
-                            </div>
+                <div className="grid grid-cols-12 items-center">
+                    <div className="col-span-12 lg:col-span-6 order-2 lg:order-1 flex justify-center relative">
+                        <div className="absolute top-40 left-1/2 translate-x-14 xl:translate-x-16 z-10 pointer-events-none hidden lg:block">
+                            <AnimatedContent
+                                distance={100}
+                                direction="vertical"
+                                reverse={false}
+                                duration={0.8}
+                                ease="power3.out"
+                                initialOpacity={0}
+                                animateOpacity
+                                scale={1}
+                                threshold={0.1}
+                                delay={0}
+                            >
+                                <CircularText
+                                    text="FRONT*END*DEVELOPER*"
+                                    onHover="speedUp"
+                                    spinDuration={20}
+                                    className="custom-class cursor-default!"
+                                />
+                            </AnimatedContent>
                         </div>
                         <Lanyard position={[0, 0, 12]} gravity={[0, -40, 0]} />
                     </div>
-                    <div className="col-span-12 md:col-span-6 order-1 md:order-2">
-                        <div className="flex flex-col gap-4 items-center md:items-start justify-center h-full">
+                    <div className="col-span-12 lg:col-span-6 order-1 lg:order-2 pt-28 md:pt-32 lg:pt-0 px-4 sm:px-6 lg:px-0">
+                        <div className="flex flex-col gap-4 items-start justify-center h-full w-full">
                             <AnimatedContent
                                 distance={100}
                                 direction="horizontal"
@@ -70,7 +67,7 @@ export default function HeroBanner() {
                                 threshold={0.1}
                                 delay={0}
                             >
-                                <div className="flex flex-col md:flex-row grow items-center gap-4 w-full mt-24 md:mt-0">
+                                <div className="flex flex-wrap items-center gap-3 sm:gap-4 w-full">
                                     <h2 className="text-xl md:text-2xl font-bold text-neutral-900 dark:text-white transition-colors">I`m Ready to Code</h2>
                                     <RotatingText
                                         texts={['Web Development', 'Web Design', 'Web Developer', 'Vibe Coder!']}
@@ -86,10 +83,10 @@ export default function HeroBanner() {
                                     />
                                 </div>
                             </AnimatedContent>
-                            <div className="flex flex-col items-center md:items-start gap-2 mt-4">
+                            <div className="flex flex-col items-start gap-2 mt-4 w-full">
                                 <SplitText
                                     text="Hi, I'm Dwi Gunardi M"
-                                    className="text-4xl sm:text-5xl md:text-6xl font-semibold text-center md:text-left text-neutral-900 dark:text-white transition-colors"
+                                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-left text-neutral-900 dark:text-white transition-colors"
                                     delay={50}
                                     duration={1.25}
                                     ease="power3.out"
@@ -103,7 +100,7 @@ export default function HeroBanner() {
                                 />
                                 <SplitText
                                     text="Frontend Developer"
-                                    className="text-4xl sm:text-5xl md:text-6xl font-semibold text-center md:text-left text-blue-600 dark:text-blue-400 transition-colors"
+                                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-left text-blue-600 dark:text-blue-400 transition-colors"
                                     delay={50}
                                     duration={1.25}
                                     ease="power3.out"
@@ -120,14 +117,14 @@ export default function HeroBanner() {
                                     delay={50}
                                     animateBy="words"
                                     direction="top"
-                                    className="text-base sm:text-lg md:text-xl mb-8 px-4 md:px-0 text-neutral-600 dark:text-neutral-300 max-w-2xl items-center md:items-start justify-center md:justify-start transition-colors leading-relaxed"
+                                    className="text-base sm:text-lg md:text-xl mb-6 text-neutral-600 dark:text-neutral-300 max-w-2xl text-left transition-colors leading-relaxed"
                                 />
-                                <div className="flex items-start gap-4 mt-2">
+                                <div className="w-full flex justify-center lg:justify-start items-center mt-2">
                                     <motion.div
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.8, delay: 0.2 }}
-                                        className="mt-4 flex flex-col justify-between gap-12 lg:gap-8 lg:flex-row lg:items-center"
+                                        className="mt-2 flex flex-col justify-between gap-6 lg:gap-8 lg:flex-row lg:items-center"
                                     >
 
                                         <SlideInButton
@@ -140,7 +137,7 @@ export default function HeroBanner() {
                                             initialTextColor="text-white"
                                             hoverTextColor="text-white"
                                             hasBorder={true}
-                                            className="flex items-center gap-2 mt-4 cursor-pointer transition-all duration-300 py-6 lg:py-5 px-8 lg:px-8 border border-neutral-300 dark:border-neutral-700 shadow-md hover:shadow-lg rounded-xl"
+                                            className="flex items-center gap-2 cursor-pointer transition-all duration-300 py-7 lg:py-5 px-10 lg:px-8"
                                         />
                                     </motion.div>
                                 </div>

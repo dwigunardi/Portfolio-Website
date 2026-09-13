@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unknown-property */
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { Canvas, extend, useFrame } from '@react-three/fiber';
@@ -60,7 +59,7 @@ export default function Lanyard({
     }, []);
 
     return (
-        <div ref={containerRef} className="relative z-0 w-full h-[60vh] md:h-screen flex justify-center items-center transform scale-100 origin-center touch-pan-y">
+        <div ref={containerRef} className="relative z-0 w-full h-[50vh] md:h-[480px] lg:h-screen flex justify-center items-center transform scale-100 origin-center touch-pan-y">
             <Canvas
                 camera={{ position, fov }}
                 dpr={[1, isMobile ? 1.5 : 2]}
