@@ -20,12 +20,12 @@ export default function AboutPage() {
             <div className="flex flex-1 w-full items-center justify-between pr-2 md:pr-6">
                 <div className="flex items-center gap-4">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-neutral-100 dark:bg-white/5 border border-neutral-200 dark:border-white/10 p-2 shadow-inner transition-colors">
-                        <Image 
-                            src={item.logo} 
-                            width={32} 
-                            height={32} 
-                            alt={`${item.company} Logo`} 
-                            className="object-contain" 
+                        <Image
+                            src={item.logo}
+                            width={32}
+                            height={32}
+                            alt={`${item.company} Logo`}
+                            className="object-contain"
                         />
                     </div>
                     <div className="flex flex-col items-start text-left">
@@ -58,13 +58,13 @@ export default function AboutPage() {
     const [activeItem, setActiveItem] = useState<string>(cardItems[0].value);
 
     return (
-        <div className="min-h-screen dark:bg-neutral-950 flex flex-col selection:bg-blue-500/30">
+        <div className="min-h-screen bg-white dark:bg-neutral-950 text-neutral-900 dark:text-white transition-colors flex flex-col selection:bg-blue-500/30">
             <NavigationBarTop />
-            <div className="fixed inset-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/20 via-neutral-950 to-neutral-950 pointer-events-none z-0" />
+            <div className="fixed inset-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-100/40 via-white to-white dark:from-blue-900/20 dark:via-neutral-950 dark:to-neutral-950 pointer-events-none z-0 transition-colors" />
             <BackgroundSection enableWaves={['middle', 'bottom']} />
             <HeroBanner />
-            
-            <main className="container mx-auto relative z-10 pb-20" id="about-me">
+
+            <main className="container mx-auto relative z-99 pb-20" id="about-me">
                 <div className="flex flex-col gap-20 mt-28 px-4 md:px-0">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
                         <AnimatedContent
@@ -84,8 +84,8 @@ export default function AboutPage() {
                                     direction="left"
                                     className="text-2xl"
                                 />
-                                <h1 className="text-4xl font-bold dark:text-white">Team Contribution</h1>
-                                <p className="dark:text-white/70 text-lg leading-relaxed">
+                                <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white transition-colors">Team Contribution</h2>
+                                <p className="text-neutral-600 dark:text-white/70 text-base md:text-lg leading-relaxed transition-colors">
                                     My professional journey involves collaborating with cross-functional teams to create responsive, scalable, and user-friendly enterprise applications.
                                 </p>
                             </div>
@@ -107,15 +107,15 @@ export default function AboutPage() {
                                         value={activeItem}
                                     >
                                         {cardItems.map((item) => (
-                                            <AccordionItem 
-                                                key={item.value} 
+                                            <AccordionItem
+                                                key={item.value}
                                                 value={item.value}
-                                                className="border-neutral-800 px-2 md:px-4"
+                                                className="border-b border-neutral-200 dark:border-neutral-800/80 px-2 md:px-4 transition-colors"
                                             >
-                                                <AccordionTrigger className="hover:no-underline py-6 text-neutral-800 dark:text-white">
+                                                <AccordionTrigger className="hover:no-underline py-6 text-neutral-900 dark:text-white transition-colors">
                                                     {item.trigger}
                                                 </AccordionTrigger>
-                                                <AccordionContent className="text-base dark:text-neutral-400 leading-relaxed pb-6 pt-2 pl-4 md:pl-20 pr-4">
+                                                <AccordionContent className="text-base text-neutral-600 dark:text-neutral-400 leading-relaxed pb-6 pt-2 pl-4 md:pl-20 pr-4 transition-colors">
                                                     {item.content}
                                                 </AccordionContent>
                                             </AccordionItem>

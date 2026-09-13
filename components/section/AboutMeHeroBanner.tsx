@@ -70,11 +70,11 @@ export default function HeroBanner() {
                                 threshold={0.1}
                                 delay={0}
                             >
-                                <div className="flex flex-col md:flex-row grow items-center gap-4 w-full mt-40 md:mt-0">
-                                    <h1 className="text-2xl font-bold text-white">I`m Ready to Code</h1>
+                                <div className="flex flex-col md:flex-row grow items-center gap-4 w-full mt-24 md:mt-0">
+                                    <h2 className="text-xl md:text-2xl font-bold text-neutral-900 dark:text-white transition-colors">I`m Ready to Code</h2>
                                     <RotatingText
                                         texts={['Web Development', 'Web Design', 'Web Developer', 'Vibe Coder!']}
-                                        mainClassName="px-2 sm:px-2 md:px-3 bg-blue-primary text-black overflow-hidden py-1 justify-center rounded-lg text-2xl font-bold inline-flex transition-all"
+                                        mainClassName="px-2 sm:px-2 md:px-3 bg-blue-600 dark:bg-blue-primary text-white dark:text-black overflow-hidden py-1 justify-center rounded-lg text-xl md:text-2xl font-bold inline-flex transition-all"
                                         staggerFrom={"last"}
                                         initial={{ y: "100%" }}
                                         animate={{ y: 0 }}
@@ -89,7 +89,7 @@ export default function HeroBanner() {
                             <div className="flex flex-col items-center md:items-start gap-2 mt-4">
                                 <SplitText
                                     text="Hi, I'm Dwi Gunardi M"
-                                    className="text-6xl font-semibold text-center text-white"
+                                    className="text-4xl sm:text-5xl md:text-6xl font-semibold text-center md:text-left text-neutral-900 dark:text-white transition-colors"
                                     delay={50}
                                     duration={1.25}
                                     ease="power3.out"
@@ -98,12 +98,12 @@ export default function HeroBanner() {
                                     to={{ opacity: 1, y: 0 }}
                                     threshold={0.1}
                                     rootMargin="-100px"
-                                    textAlign="center"
+                                    textAlign="left"
                                     tag="h1"
                                 />
                                 <SplitText
                                     text="Frontend Developer"
-                                    className="text-6xl font-semibold text-center text-blue-primary"
+                                    className="text-4xl sm:text-5xl md:text-6xl font-semibold text-center md:text-left text-blue-600 dark:text-blue-400 transition-colors"
                                     delay={50}
                                     duration={1.25}
                                     ease="power3.out"
@@ -112,22 +112,22 @@ export default function HeroBanner() {
                                     to={{ opacity: 1, y: 0 }}
                                     threshold={0.1}
                                     rootMargin="-100px"
-                                    textAlign="center"
-                                    tag="h1"
+                                    textAlign="left"
+                                    tag="h2"
                                 />
                                 <BlurText
                                     text="I'm a passionate frontend developer specializing in crafting engaging and user-friendly web experiences, with 4 years of experience in the field. Explore my projects, skills, and contact information to see how I can bring your ideas to life with clean code and innovative design."
                                     delay={50}
                                     animateBy="words"
                                     direction="top"
-                                    className="text-2xl mb-8 px-4 md:px-0 text-white/80 max-w-2xl items-center md:items-start justify-center md:justify-start"
+                                    className="text-base sm:text-lg md:text-xl mb-8 px-4 md:px-0 text-neutral-600 dark:text-neutral-300 max-w-2xl items-center md:items-start justify-center md:justify-start transition-colors leading-relaxed"
                                 />
-                                <div className="flex items-start gap-4 mt-4">
+                                <div className="flex items-start gap-4 mt-2">
                                     <motion.div
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.8, delay: 0.2 }}
-                                        className="mt-12 flex flex-col justify-between gap-12 lg:gap-8 lg:flex-row lg:items-center"
+                                        className="mt-4 flex flex-col justify-between gap-12 lg:gap-8 lg:flex-row lg:items-center"
                                     >
 
                                         <SlideInButton
@@ -135,12 +135,12 @@ export default function HeroBanner() {
                                             hoverText="Download!"
                                             icon={<ArrowUpRight size={18} />}
                                             onClick={() => handleDownloadResume()}
-                                            initialFill="bg-neutral-900"
-                                            hoverFill="bg-gradient-to-r from-blue-500 to-purple-500"
+                                            initialFill="bg-neutral-900 dark:bg-neutral-800"
+                                            hoverFill="bg-gradient-to-r from-blue-600 to-indigo-600"
                                             initialTextColor="text-white"
                                             hoverTextColor="text-white"
-                                            hasBorder={false}
-                                            className="flex items-center gap-2 mt-4 cursor-pointer transition-all duration-300 py-7 lg:py-5 px-10 lg:px-8"
+                                            hasBorder={true}
+                                            className="flex items-center gap-2 mt-4 cursor-pointer transition-all duration-300 py-6 lg:py-5 px-8 lg:px-8 border border-neutral-300 dark:border-neutral-700 shadow-md hover:shadow-lg rounded-xl"
                                         />
                                     </motion.div>
                                 </div>

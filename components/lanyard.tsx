@@ -34,7 +34,9 @@ export default function Lanyard({
     fov = 20,
     transparent = true
 }: LanyardProps) {
+    const containerRef = useRef<HTMLDivElement>(null);
     const [isMobile, setIsMobile] = useState<boolean>(() => typeof window !== 'undefined' && window.innerWidth < 768);
+    const [isInView, setIsInView] = useState<boolean>(true);
 
     useEffect(() => {
         const handleResize = (): void => setIsMobile(window.innerWidth < 768);
@@ -42,17 +44,34 @@ export default function Lanyard({
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    useEffect(() => {
+        const el = containerRef.current;
+        if (!el || typeof IntersectionObserver === 'undefined') return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsInView(entry.isIntersecting);
+            },
+            { threshold: 0.05 }
+        );
+
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <div className="relative z-0 w-full h-screen flex justify-center items-center transform scale-100 origin-center">
+        <div ref={containerRef} className="relative z-0 w-full h-[60vh] md:h-screen flex justify-center items-center transform scale-100 origin-center touch-pan-y">
             <Canvas
                 camera={{ position, fov }}
                 dpr={[1, isMobile ? 1.5 : 2]}
                 gl={{ alpha: transparent }}
+                style={{ touchAction: 'pan-y' }}
+                className="touch-pan-y"
                 onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
             >
                 <ambientLight intensity={Math.PI} />
-                <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
-                    <Band isMobile={isMobile} />
+                <Physics paused={!isInView} gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
+                    <Band isMobile={isMobile} isInView={isInView} />
                 </Physics>
                 <Environment blur={0.75}>
                     <Lightformer
@@ -93,9 +112,10 @@ interface BandProps {
     maxSpeed?: number;
     minSpeed?: number;
     isMobile?: boolean;
+    isInView?: boolean;
 }
 
-function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
+function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, isInView = true }: BandProps) {
     // Using "any" for refs since the exact types depend on Rapier's internals
     const band = useRef<any>(null);
     const fixed = useRef<any>(null);
@@ -128,6 +148,16 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
     const [hovered, hover] = useState(false);
     const [isFlipped, setIsFlipped] = useState(false);
 
+    // Hold-to-drag refs for mobile/touch devices
+    const holdTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const touchStartPos = useRef<{ x: number; y: number } | null>(null);
+
+    useEffect(() => {
+        return () => {
+            if (holdTimer.current) clearTimeout(holdTimer.current);
+        };
+    }, []);
+
     useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
     useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
     useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1]);
@@ -146,6 +176,8 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
     }, [hovered, dragged]);
 
     useFrame((state, delta) => {
+        if (!isInView) return;
+
         if (dragged && typeof dragged !== 'boolean') {
             vec.set(state.pointer.x, state.pointer.y, 0.5).unproject(state.camera);
             dir.copy(vec).sub(state.camera.position).normalize();
@@ -219,13 +251,69 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
                         onPointerOut={() => {
                             setTimeout(() => hover(false), 200);
                         }}
+                        onPointerDown={(e: any) => {
+                            const isTouch = e.pointerType === 'touch';
+
+                            if (!isTouch) {
+                                // Desktop / Mouse: drag seketika saat klik & hold
+                                e.target.setPointerCapture(e.pointerId);
+                                drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())));
+                                return;
+                            }
+
+                            // Touch (Mobile / Tablet): Hold-to-Drag
+                            // Catat posisi awal sentuhan
+                            touchStartPos.current = { x: e.clientX, y: e.clientY };
+                            const target = e.target;
+                            const pointerId = e.pointerId;
+                            const dragOffset = new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation()));
+
+                            if (holdTimer.current) clearTimeout(holdTimer.current);
+
+                            holdTimer.current = setTimeout(() => {
+                                try {
+                                    target.setPointerCapture(pointerId);
+                                } catch {}
+                                drag(dragOffset);
+                                if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+                                    try { navigator.vibrate(15); } catch {}
+                                }
+                            }, 200);
+                        }}
+                        onPointerMove={(e: any) => {
+                            // Jika jari bergeser > 8px sebelum 200ms, berarti user berniat scroll halaman!
+                            if (e.pointerType === 'touch' && !dragged && touchStartPos.current) {
+                                const dx = Math.abs(e.clientX - touchStartPos.current.x);
+                                const dy = Math.abs(e.clientY - touchStartPos.current.y);
+                                if (dx > 8 || dy > 8) {
+                                    if (holdTimer.current) {
+                                        clearTimeout(holdTimer.current);
+                                        holdTimer.current = null;
+                                    }
+                                }
+                            }
+                        }}
                         onPointerUp={(e: any) => {
-                            e.target.releasePointerCapture(e.pointerId);
+                            if (holdTimer.current) {
+                                clearTimeout(holdTimer.current);
+                                holdTimer.current = null;
+                            }
+                            touchStartPos.current = null;
+                            try {
+                                e.target.releasePointerCapture(e.pointerId);
+                            } catch {}
                             drag(false);
                         }}
-                        onPointerDown={(e: any) => {
-                            e.target.setPointerCapture(e.pointerId);
-                            drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())));
+                        onPointerCancel={(e: any) => {
+                            if (holdTimer.current) {
+                                clearTimeout(holdTimer.current);
+                                holdTimer.current = null;
+                            }
+                            touchStartPos.current = null;
+                            try {
+                                e.target.releasePointerCapture(e.pointerId);
+                            } catch {}
+                            drag(false);
                         }}
                         onDoubleClick={(e: any) => {
                             e.stopPropagation();
@@ -251,7 +339,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
                                 wrapperClass="pointer-events-none"
                             >
                                 <div className="bg-black/80 text-white text-xs px-3 py-1.5 rounded-md shadow-lg whitespace-nowrap transition-all duration-200 ease-in-out backdrop-blur-sm border border-white/10">
-                                    Double click to see a flip!
+                                    {isMobile ? "Hold to drag / Double tap to flip" : "Double click to see a flip!"}
                                 </div>
                             </Html>
                         )}
